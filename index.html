@@ -2,56 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>FAQ | Petitek</title>
+  <title>All ChatrBox Support Answers</title>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 2rem auto; background: #f5f8fa;}
-    h1 { text-align: center; }
-    #search { width: 100%; padding: 10px; font-size: 1.1em; margin-bottom: 2rem; border-radius: 8px; border: 1px solid #ccc;}
-    .qa { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px #0001; margin-bottom: 1.2rem; padding: 1.2rem; }
-    .qa a { font-weight: 600; font-size: 1.07em; text-decoration: none; color: #2066cc; }
-    .qa .answer { color: #444; margin-top: 6px; }
-    @media (max-width: 500px) { body { padding: 0 4vw; } }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f8fa; margin: 0; padding: 0; }
+    h1 { font-size: 2rem; margin: 32px 0 16px 32px; }
+    #search { width: 95%; max-width: 700px; margin: 0 auto 24px; display: block; padding: 10px; font-size: 1.1em; border-radius: 8px; border: 1px solid #bbb; }
+    .qa-list { max-width: 700px; margin: 0 auto; }
+    .qa { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px #0001; margin-bottom: 1.4rem; padding: 1.2rem 1.5rem; }
+    .question { color: #2066cc; font-size: 1.13em; margin-bottom: 6px; font-weight: 600; }
+    .answer { color: #222; font-size: 1.05em; line-height: 1.6; }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.15rem; margin-left: 10px; }
+      .qa-list, #search { max-width: 98vw; }
+      .qa { padding: 1rem; }
+    }
   </style>
 </head>
 <body>
-  <h1>Petitek FAQ</h1>
+  <h1>All ChatrBox Support Answers</h1>
   <input type="text" id="search" placeholder="Search questions or answers..." autocomplete="off" />
-
-  <div id="faq-list"></div>
+  <div id="qa-list" class="qa-list"></div>
 
   <script>
     let faqData = [];
-    let faqList = document.getElementById('faq-list');
-    let searchBox = document.getElementById('search');
+    const listEl = document.getElementById('qa-list');
+    const searchInput = document.getElementById('search');
 
     fetch('faq.json')
       .then(res => res.json())
       .then(data => {
         faqData = data;
-        renderFaq(faqData);
+        render(faqData);
       });
 
-    searchBox.addEventListener('input', function() {
+    searchInput.addEventListener('input', function() {
       const q = this.value.trim().toLowerCase();
-      if (!q) return renderFaq(faqData);
-      const filtered = faqData.filter(item =>
+      if (!q) return render(faqData);
+      render(faqData.filter(item =>
         item.question.toLowerCase().includes(q) ||
-        (item.answer && item.answer.toLowerCase().includes(q))
-      );
-      renderFaq(filtered);
+        item.answer.toLowerCase().includes(q)
+      ));
     });
 
-    function renderFaq(list) {
-      faqList.innerHTML = '';
-      if (!list.length) {
-        faqList.innerHTML = '<p style="text-align:center; color:#888;">No results found.</p>';
+    function render(data) {
+      listEl.innerHTML = '';
+      if (!data.length) {
+        listEl.innerHTML = `<p style="text-align:center;color:#888;">No results found.</p>`;
         return;
       }
-      list.forEach(item => {
-        faqList.innerHTML += `
+      data.forEach(item => {
+        listEl.innerHTML += `
           <div class="qa">
-            <a href="${item.link || '#'}" target="_blank">${item.question}</a>
-            <div class="answer">${item.answer || ''}</div>
+            <div class="question">${item.question}</div>
+            <div class="answer">${item.answer}</div>
           </div>
         `;
       });
@@ -59,3 +62,4 @@
   </script>
 </body>
 </html>
+
