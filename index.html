@@ -42,16 +42,25 @@
         (item.Question || '').toLowerCase().includes(q)
       ));
     });
-
-    
- searchInput.addEventListener('input', function() {
-  const q = this.value.trim().toLowerCase();
-  if (!q) return render(faqData);
-  render(faqData.filter(item =>
-    (item.Question || '').toLowerCase().includes(q)
-  ));
-});
-
+ 
+  function render(data) {
+  listEl.innerHTML = '';
+  if (!data.length) {
+    listEl.innerHTML = `<p style="text-align:center;color:#888;">No results found.</p>`;
+    return;
+  }
+  data.forEach(item => {
+    if (item.Question && item.View) {
+      listEl.innerHTML += `
+        <div class="qa">
+          <div class="question">${item.Question}</div>
+          <a href="${item.View}" target="_blank" class="view-btn">View Answer</a>
+        </div>
+      `;
+    }
+  });
+}
+  
   </script>
 </body>
 </html>
