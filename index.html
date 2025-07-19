@@ -43,8 +43,7 @@
       ));
     });
  
- 
-  function render(data) {
+ function render(data) {
   listEl.innerHTML = '';
   if (!data.length) {
     listEl.innerHTML = `<p style="text-align:center;color:#888;">No results found.</p>`;
@@ -54,9 +53,7 @@
     if (item.Question && item.View) {
       listEl.innerHTML += `
         <div class="qa">
-          <div class="question">${item.Question}</div>
-          ${item.Answers ? `<div class="answer">${item.Answers}</div>` : ''}
-          <a href="${item.View}" target="_blank" class="view-btn">View Full Answer</a>
+          <a href="${item.View}" target="_blank" class="question">${item.Question}</a>
         </div>
       `;
     }
