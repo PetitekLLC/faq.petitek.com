@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FAQ | Petitek</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; max-width: 700px; margin: 2rem auto; background: #f5f8fa;}
+    h1 { text-align: center; }
+    #search { width: 100%; padding: 10px; font-size: 1.1em; margin-bottom: 2rem; border-radius: 8px; border: 1px solid #ccc;}
+    .qa { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px #0001; margin-bottom: 1.2rem; padding: 1.2rem; }
+    .qa a { font-weight: 600; font-size: 1.07em; text-decoration: none; color: #2066cc; }
+    .qa .answer { color: #444; margin-top: 6px; }
+    @media (max-width: 500px) { body { padding: 0 4vw; } }
+  </style>
+</head>
+<body>
+  <h1>Petitek FAQ</h1>
+  <input type="text" id="search" placeholder="Search questions or answers..." autocomplete="off" />
+
+  <div id="faq-list"></div>
+
+  <script>
+    let faqData = [];
+    let faqList = document.getElementById('faq-list');
+    let searchBox = document.getElementById('search');
+
+    fetch('faq.json')
+      .then(res => res.json())
+      .then(data => {
+        faqData = data;
+        renderFaq(faqData);
+      });
+
+    searchBox.addEventListener('input', function() {
+      const q = this.value.trim().toLowerCase();
+      if (!q) return renderFaq(faqData);
+      const filtered = faqData.filter(item =>
+        item.question.toLowerCase().includes(q) ||
+        (item.answer && item.answer.toLowerCase().includes(q))
+      );
+      renderFaq(filtered);
+    });
+
+    function renderFaq(list) {
+      faqList.innerHTML = '';
+      if (!list.length) {
+        faqList.innerHTML = '<p style="text-align:center; color:#888;">No results found.</p>';
+        return;
+      }
+      list.forEach(item => {
+        faqList.innerHTML += `
+          <div class="qa">
+            <a href="${item.link || '#'}" target="_blank">${item.question}</a>
+            <div class="answer">${item.answer || ''}</div>
+          </div>
+        `;
+      });
+    }
+  </script>
+</body>
+</html>
