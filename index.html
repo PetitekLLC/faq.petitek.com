@@ -6,25 +6,19 @@
   <style>
     body { font-family: 'Segoe UI', sans-serif; background: #f5f8fa; margin: 0; padding: 0; }
     h1 { font-size: 2.2rem; margin: 36px 0 20px 0; text-align: center; }
-    #questionInput { width: 96%; max-width: 700px; margin: 30px auto 8px; display: block; padding: 12px; font-size: 1.1em; border-radius: 8px; border: 1px solid #bbb; }
-    #autocorrectMsg { font-size: 0.9em; color: #2066cc; display: block; text-align: center; }
     #search { width: 96%; max-width: 700px; margin: 0 auto 30px; display: block; padding: 12px; font-size: 1.1em; border-radius: 8px; border: 1px solid #bbb; }
     .qa-list { max-width: 700px; margin: 0 auto; }
     .qa { background: #fff; border-radius: 10px; box-shadow: 0 1px 8px #0002; margin-bottom: 1.4rem; padding: 1.3rem 1.5rem; }
     .question { color: #1860c2; font-size: 1.14em; margin-bottom: 7px; font-weight: 600; }
     @media (max-width: 700px) {
       h1 { font-size: 1.3rem; }
-      .qa-list, #search, #questionInput { max-width: 98vw; }
+      .qa-list, #search { max-width: 98vw; }
       .qa { padding: 1rem; }
     }
   </style>
 </head>
 <body>
   <h1>ChatrBox FAQ</h1>
-
-  <!-- Smart input with auto-correct -->
-  <input id="questionInput" type="text" placeholder="Ask a question..." />
-  <span id="autocorrectMsg"></span>
 
   <!-- FAQ Search and List -->
   <input type="text" id="search" placeholder="Search questions..." autocomplete="off" />
@@ -67,60 +61,9 @@
         }
       });
     }
-
-    // --- Real-time grammar/spelling correction for questionInput ---
-    let correctionTimeout = null;
-
-    async function correctQuestion(text) {
-      const apiKey = 'sk-...'; // <-- YOUR OpenAI API key
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + apiKey,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [
-            {role: "system", content: "Correct this question for spelling and grammar, but don't change the meaning."},
-            {role: "user", content: text}
-          ],
-          max_tokens: 60
-        })
-      });
-      const data = await response.json();
-      return data.choices[0].message.content.trim();
-    }
-
-    const input = document.getElementById('questionInput');
-    const msg = document.getElementById('autocorrectMsg');
-
-    input.addEventListener('blur', async function() {
-      if (input.value.trim().length < 3) return;
-      msg.textContent = "Checking spelling…";
-      input.disabled = true;
-      let corrected = await correctQuestion(input.value);
-      input.value = corrected;
-      input.disabled = false;
-      msg.textContent = "Auto-corrected!";
-      setTimeout(() => { msg.textContent = ""; }, 1200);
-    });
-
-    input.addEventListener('input', function() {
-      clearTimeout(correctionTimeout);
-      correctionTimeout = setTimeout(async () => {
-        if (input.value.trim().length < 3) return;
-        msg.textContent = "Checking spelling…";
-        input.disabled = true;
-        let corrected = await correctQuestion(input.value);
-        input.value = corrected;
-        input.disabled = false;
-        msg.textContent = "Auto-corrected!";
-        setTimeout(() => { msg.textContent = ""; }, 1200);
-      }, 2000); // 2 seconds pause after typing
-    });
   </script>
 </body>
 </html>
+
 
 
