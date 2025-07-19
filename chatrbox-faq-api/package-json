@@ -1,0 +1,11 @@
+{
+  "name": "chatrbox-faq-api",
+  "version": "1.0.0",
+  "main": "faq-api.js",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "scripts": {
+    "start": "node faq-api.js"
+  }
+}
