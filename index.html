@@ -28,7 +28,7 @@
     const listEl = document.getElementById('qa-list');
     const searchInput = document.getElementById('search');
 
-    fetch('faq.json')
+  fetch('https://faq-petitek-com.onrender.com/faq')
       .then(res => res.json())
       .then(data => {
         faqData = data;
