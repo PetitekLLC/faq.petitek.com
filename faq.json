@@ -1,0 +1,13 @@
+[
+  {
+    "question": "What is ChatrBox?",
+    "answer": "ChatrBox is a smart pet trainer that uses audio and light to train your pet...",
+    "link": "answers/what-is-chatrbox.html"
+  },
+  {
+    "question": "How do I reset ChatrBox?",
+    "answer": "Hold the reset button for 5 seconds until the LED flashes.",
+    "link": "answers/how-do-i-reset.html"
+  }
+  // Add more Q&A here
+]
