@@ -10,7 +10,7 @@
     .qa-list { max-width: 700px; margin: 0 auto; }
     .qa { background: #fff; border-radius: 10px; box-shadow: 0 1px 8px #0002; margin-bottom: 1.4rem; padding: 1.3rem 1.5rem; }
     .question { color: #1860c2; font-size: 1.14em; margin-bottom: 7px; font-weight: 600; }
-    .answers { color: #262626; font-size: 1.04em; line-height: 1.7; }
+    .view-btn { display:inline-block; margin-top:8px; padding:7px 20px; background:#2066cc; color:#fff; border-radius:8px; text-decoration:none; font-weight:500; }
     @media (max-width: 700px) {
       h1 { font-size: 1.3rem; }
       .qa-list, #search { max-width: 98vw; }
@@ -20,48 +20,49 @@
 </head>
 <body>
   <h1>ChatrBox FAQ</h1>
-  <input type="text" id="search" placeholder="Search questions or answers..." autocomplete="off" />
+  <input type="text" id="search" placeholder="Search questions..." autocomplete="off" />
   <div id="qa-list" class="qa-list"></div>
 
   <script>
-let faqData = [];
-  const listEl = document.getElementById('qa-list');
-  const searchInput = document.getElementById('search');
+    let faqData = [];
+    const listEl = document.getElementById('qa-list');
+    const searchInput = document.getElementById('search');
 
-  fetch('https://opensheet.elk.sh/1lcfJ-OKpeF4A6u9A2rs6CvMcncv7cp8O9IG61J96Tec/Support')
-    .then(res => res.json())
-    .then(data => {
-      faqData = data;
-      render(faqData);
+    fetch('https://opensheet.elk.sh/1lcfJ-OKpeF4A6u9A2rs6CvMcncv7cp8O9IG61J96Tec/Support')
+      .then(res => res.json())
+      .then(data => {
+        faqData = data;
+        render(faqData);
+      });
+
+    searchInput.addEventListener('input', function() {
+      const q = this.value.trim().toLowerCase();
+      if (!q) return render(faqData);
+      render(faqData.filter(item =>
+        (item.Question || '').toLowerCase().includes(q)
+      ));
     });
 
-  searchInput.addEventListener('input', function() {
-    const q = this.value.trim().toLowerCase();
-    if (!q) return render(faqData);
-    render(faqData.filter(item =>
-      (item.Question || '').toLowerCase().includes(q) ||
-      (item.Answers || '').toLowerCase().includes(q)
-    ));
-  });
-
-  function render(data) {
-    listEl.innerHTML = '';
-    if (!data.length) {
-      listEl.innerHTML = `<p style="text-align:center;color:#888;">No results found.</p>`;
-      return;
-    }
-    data.forEach(item => {
-      if (item.Question && item.Answers && item.Answers !== "View") {
-        listEl.innerHTML += `
-          <div class="qa">
-            <div class="question">${item.Question}</div>
-            <div class="answers">${item.Answers}</div>
-          </div>
-        `;
+    function render(data) {
+      listEl.innerHTML = '';
+      if (!data.length) {
+        listEl.innerHTML = `<p style="text-align:center;color:#888;">No results found.</p>`;
+        return;
       }
-    });
-  }
-</script>
+      data.forEach((item, idx) => {
+        // Use 'Link' or your actual column name for the answer URL
+        if (item.Question && item.Link) {
+          listEl.innerHTML += `
+            <div class="qa">
+              <div class="question">${item.Question}</div>
+              <a href="${item.Link}" target="_blank" class="view-btn">View Answer</a>
+            </div>
+          `;
+        }
+      });
+    }
+  </script>
 </body>
 </html>
+
 
