@@ -4,17 +4,42 @@
   <meta charset="UTF-8" />
   <title>ChatrBox FAQ</title>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; background: #f5f8fa; margin: 0; padding: 0; }
-    h1 { font-size: 2.2rem; margin: 36px 0 20px 0; text-align: center; }
-    #search { width: 96%; max-width: 700px; margin: 0 auto 30px; display: block; padding: 12px; font-size: 1.1em; border-radius: 8px; border: 1px solid #bbb; }
-    .qa-list { max-width: 700px; margin: 0 auto; }
-    .qa { background: #fff; border-radius: 10px; box-shadow: 0 1px 8px #0002; margin-bottom: 1.4rem; padding: 1.3rem 1.5rem; }
-    .question { color: #1860c2; font-size: 1.14em; margin-bottom: 7px; font-weight: 600; }
-    @media (max-width: 700px) {
-      h1 { font-size: 1.3rem; }
-      .qa-list, #search { max-width: 98vw; }
-      .qa { padding: 1rem; }
-    }
+ body { font-family: 'Segoe UI', sans-serif; background: #f5f8fa; margin: 0; padding: 0; }
+h1 { font-size: 2.2rem; margin: 36px 0 20px 0; text-align: center; }
+#search {
+  width: 96%; max-width: 700px; margin: 0 auto 30px;
+  display: block; padding: 14px;
+  font-size: 1.13em; border-radius: 8px; border: 1px solid #bbb;
+}
+.qa-list { max-width: 700px; margin: 0 auto; }
+.qa {
+  background: #fff; border-radius: 10px;
+  box-shadow: 0 1px 8px #0002;
+  margin-bottom: 1.4rem;
+  padding: 1.4rem 1.5rem;
+  transition: box-shadow .18s;
+}
+.qa:active, .qa:focus-within { box-shadow: 0 2px 20px #1860c225; }
+.question {
+  color: #1860c2; font-size: 1.21em; margin-bottom: 7px; font-weight: 600;
+  text-decoration: none; display: block;
+}
+
+/* --- Responsive mobile improvements --- */
+@media (max-width: 700px) {
+  h1 { font-size: 1.62rem; }
+  #search { max-width: 98vw; font-size: 1.15em; padding: 16px; }
+  .qa-list { max-width: 99vw; }
+  .qa { padding: 1.12rem 0.75rem; }
+  .question { font-size: 1.13em; }
+}
+@media (max-width: 400px) {
+  h1 { font-size: 1.21rem; }
+  .question { font-size: 1em; }
+  #search { font-size: 1em; }
+}
+ 
+
   </style>
 </head>
 <body>
