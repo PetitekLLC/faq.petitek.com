@@ -5,69 +5,89 @@
   <title>ChatrBox FAQ</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; background: #f5f8fa; margin: 0; padding: 0; }
+    :root {
+      --chatrbox-teal: #2bb2cd;
+    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f8fa; margin: 0; padding: 0; }
 
     /* NAVBAR LAYOUT */
     .navbar {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: space-between;
       position: sticky;
       top: 0;
       z-index: 10;
       height: 56px;
-      background: #fff;
+      background: var(--chatrbox-teal);
+      color: #fff;
       box-shadow: 0 1px 8px #0001;
-      border-bottom: 1px solid #e3e6eb;
+      padding: 0 16px;
     }
-    .hamburger {
-      margin-left: 10px;
-      background: none;
-      border: none;
-      font-size: 1.9em;
-      color: #1860c2;
-      cursor: pointer;
-      border-radius: 8px;
-      width: 38px;
-      height: 38px;
-      min-width: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.16s;
-      position: relative;
-      flex: 0 0 auto;
-    }
-    .hamburger:active, .hamburger:focus { background: #e9f2fd; }
     .back-btn {
       background: none;
       border: none;
-      font-size: 1.15em;
-      color: #1860c2;
+      color: #fff;
       cursor: pointer;
+      font-size: 1.13em;
+      font-weight: 500;
       display: flex;
       align-items: center;
-      gap: 2px;
-      margin-left: 2px;
-      margin-right: 10px;
+      gap: 7px;
+      padding: 6px 10px 6px 0;
       border-radius: 8px;
-      padding: 7px 10px 7px 0;
-      font-weight: 500;
-      transition: background 0.16s;
-      min-width: 38px;
-      flex: 0 0 auto;
+      transition: background 0.18s;
     }
-    .back-btn:hover { background: #e9f2fd; }
+    .back-btn:hover { background: #25a0b7; }
+    .back-arrow {
+      display: inline-block;
+      width: 19px;
+      height: 19px;
+      stroke: #fff;
+      stroke-width: 2.3;
+    }
     .navbar-title {
-      flex: 1 1 auto;
+      flex: 1;
       text-align: center;
-      font-size: 1.24em;
-      font-weight: 600;
-      color: #1860c2;
-      pointer-events: none;
-      user-select: none;
+      font-size: 2em;
+      font-weight: 700;
       letter-spacing: 0.01em;
-      margin-right: 38px; /* keeps title centered even with left icons */
+      color: #fff;
+      font-family: inherit;
+      margin-left: -40px; /* nudge to counter hamburger width for perfect centering */
+    }
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      margin-left: 12px;
+      margin-right: 0;
+      border-radius: 7px;
+      transition: background 0.18s;
+    }
+    .hamburger:focus, .hamburger:hover { background: #25a0b7; }
+    .hamburger-lines {
+      width: 32px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+    .hamburger-line {
+      height: 3.2px;
+      border-radius: 2px;
+      width: 100%;
+      background: #fff;
+      transition: background 0.18s;
     }
 
     /* Drawer */
@@ -81,35 +101,34 @@
     @keyframes fadeIn { from { opacity: 0;} to {opacity: 1;} }
     .drawer {
       position: fixed; z-index: 40;
-      top: 0; left: 0;
-      width: 220px; height: 100vh;
+      top: 0; right: 0;
+      width: 230px; height: 100vh;
       background: #fff;
-      box-shadow: 2px 0 16px #0002;
+      box-shadow: -2px 0 16px #0002;
       padding-top: 62px;
-      transform: translateX(-240px);
+      transform: translateX(240px);
       transition: transform .23s cubic-bezier(.7,.2,.3,1);
     }
     .drawer.open { transform: translateX(0); }
     .drawer a {
       display: block;
-      color: #1860c2;
+      color: var(--chatrbox-teal);
       text-decoration: none;
-      padding: 15px 24px;
-      font-size: 1.13em;
-      border-bottom: 1px solid #f0f0f0;
-      font-weight: 500;
-      transition: background .14s;
+      padding: 17px 28px;
+      font-size: 1.14em;
+      border-bottom: 1px solid #e6e6e6;
+      font-weight: 600;
+      transition: background .15s, color .12s;
     }
-    .drawer a:hover { background: #e9f2fd; }
+    .drawer a:hover { background: #eafaff; color: #188a9a; }
 
     /* Main Page Layout */
     #search {
-      width: 96%; max-width: 700px; margin: 18px auto 30px auto;
+      width: 96%; max-width: 700px; margin: 28px auto 30px auto;
       display: block; padding: 15px 15px;
       font-size: 1.14em; border-radius: 8px; border: 1px solid #bbb;
       box-sizing: border-box;
       background: #fff;
-      margin-top: 28px;
     }
     .qa-list { max-width: 700px; margin: 0 auto; }
     .qa {
@@ -122,41 +141,48 @@
     }
     .qa:active, .qa:focus-within { box-shadow: 0 2px 18px #1860c225; }
     .question {
-      color: #1860c2; font-size: 1.15em; margin-bottom: 3px; font-weight: 600;
+      color: var(--chatrbox-teal); font-size: 1.15em; margin-bottom: 3px; font-weight: 600;
       text-decoration: none; display: block; padding: 0;
     }
 
     /* Mobile Responsive */
     @media (max-width: 700px) {
-      .navbar-title { font-size: 1em; }
-      .navbar { height: 48px; }
-      .hamburger { font-size: 1.3em; width: 28px; height: 28px; margin-left: 2px;}
-      .back-btn { font-size: 1em; margin-right: 6px;}
-      #search { max-width: 99vw; font-size: 1em; padding: 12px; margin-top: 18px;}
+      .navbar-title { font-size: 1.18em; margin-left: -34px;}
+      .navbar { height: 44px; }
+      .back-btn { font-size: 1em; }
+      .hamburger { width: 32px; height: 32px; margin-left: 2px;}
+      .hamburger-lines { width: 23px; height: 18px; }
+      #search { max-width: 99vw; font-size: 1em; padding: 12px; margin-top: 14px;}
       .qa-list { max-width: 99vw; }
       .qa { padding: 0.9rem 0.6rem; }
       .question { font-size: 1em; }
-      .drawer { width: 69vw; min-width: 156px; max-width: 240px; }
-      .navbar-title { margin-right: 28px; }
+      .drawer { width: 70vw; min-width: 142px; max-width: 220px; }
+      .navbar-title { margin-right: 0; }
     }
     @media (max-width: 400px) {
-      .navbar-title { font-size: 0.92em; }
-      #search { font-size: 0.96em; }
-      .question { font-size: 0.97em; }
+      .navbar-title { font-size: 0.93em; }
+      #search { font-size: 0.93em; }
+      .question { font-size: 0.93em; }
     }
   </style>
 </head>
 <body>
   <!-- NAV BAR -->
   <div class="navbar">
-    <button class="hamburger" id="hamburgerBtn" aria-label="Open Menu">&#9776;</button>
     <button class="back-btn" onclick="window.location.href='https://petitek.com'">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="vertical-align:middle;">
-        <path d="M12.9 16.3a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 0 1 1.4 1.4L8.42 10l4.48 4.48a1 1 0 0 1 0 1.42z" fill="#1860c2"/>
+      <svg class="back-arrow" viewBox="0 0 22 22" fill="none">
+        <path d="M14.5 18L7.5 11L14.5 4" stroke="#fff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <span>Back</span>
+      Back
     </button>
-    <span class="navbar-title">ChatrBox FAQ</span>
+    <span class="navbar-title">ChatrBox&nbsp;FAQ</span>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open Menu">
+      <span class="hamburger-lines">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </span>
+    </button>
   </div>
 
   <!-- Drawer for hamburger menu -->
