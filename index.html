@@ -7,69 +7,70 @@
   <style>
     body { font-family: 'Segoe UI', sans-serif; background: #f5f8fa; margin: 0; padding: 0; }
 
-    /* NAVBAR */
+    /* NAVBAR LAYOUT */
     .navbar {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       position: sticky;
       top: 0;
       z-index: 10;
-      height: 54px;
+      height: 56px;
       background: #fff;
       box-shadow: 0 1px 8px #0001;
       border-bottom: 1px solid #e3e6eb;
     }
-    .navbar .back-btn {
-      position: absolute;
-      left: 12px;
+    .hamburger {
+      margin-left: 10px;
       background: none;
       border: none;
-      font-size: 1.4em;
+      font-size: 1.9em;
       color: #1860c2;
       cursor: pointer;
-      outline: none;
-      display: flex;
-      align-items: center;
-      gap: 3px;
-      padding: 7px 12px 7px 0;
-      font-weight: 500;
-      transition: background 0.16s;
-    }
-    .navbar .back-btn:hover {
-      background: #e9f2fd;
       border-radius: 8px;
-    }
-    .navbar .hamburger {
-      position: absolute;
-      left: 48px;
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
+      min-width: 38px;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background 0.16s;
+      position: relative;
+      flex: 0 0 auto;
+    }
+    .hamburger:active, .hamburger:focus { background: #e9f2fd; }
+    .back-btn {
       background: none;
       border: none;
-      cursor: pointer;
-      font-size: 1.7em;
+      font-size: 1.15em;
       color: #1860c2;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-left: 2px;
+      margin-right: 10px;
       border-radius: 8px;
+      padding: 7px 10px 7px 0;
+      font-weight: 500;
       transition: background 0.16s;
+      min-width: 38px;
+      flex: 0 0 auto;
     }
-    .navbar .hamburger:active, .navbar .hamburger:focus {
-      background: #e9f2fd;
-    }
+    .back-btn:hover { background: #e9f2fd; }
     .navbar-title {
-      margin: 0 auto;
-      font-size: 1.29em;
+      flex: 1 1 auto;
+      text-align: center;
+      font-size: 1.24em;
       font-weight: 600;
       color: #1860c2;
-      letter-spacing: 0.01em;
-      text-align: center;
       pointer-events: none;
       user-select: none;
+      letter-spacing: 0.01em;
+      margin-right: 38px; /* keeps title centered even with left icons */
     }
-    /* Hamburger Drawer */
+
+    /* Drawer */
     .drawer-bg {
       display: none;
       position: fixed; z-index: 30;
@@ -85,7 +86,6 @@
       background: #fff;
       box-shadow: 2px 0 16px #0002;
       padding-top: 62px;
-      padding-left: 0;
       transform: translateX(-240px);
       transition: transform .23s cubic-bezier(.7,.2,.3,1);
     }
@@ -95,66 +95,67 @@
       color: #1860c2;
       text-decoration: none;
       padding: 15px 24px;
-      font-size: 1.09em;
+      font-size: 1.13em;
       border-bottom: 1px solid #f0f0f0;
       font-weight: 500;
       transition: background .14s;
     }
     .drawer a:hover { background: #e9f2fd; }
-    /* Rest of the page */
-    h1 { font-size: 2.2rem; margin: 36px 0 20px 0; text-align: center; }
+
+    /* Main Page Layout */
     #search {
-      width: 96%; max-width: 700px; margin: 0 auto 30px;
-      display: block; padding: 14px;
-      font-size: 1.13em; border-radius: 8px; border: 1px solid #bbb;
+      width: 96%; max-width: 700px; margin: 18px auto 30px auto;
+      display: block; padding: 15px 15px;
+      font-size: 1.14em; border-radius: 8px; border: 1px solid #bbb;
+      box-sizing: border-box;
+      background: #fff;
+      margin-top: 28px;
     }
     .qa-list { max-width: 700px; margin: 0 auto; }
     .qa {
-      background: #fff; border-radius: 10px;
-      box-shadow: 0 1px 8px #0002;
-      margin-bottom: 1.4rem;
-      padding: 1.4rem 1.5rem;
+      background: #fff; border-radius: 13px;
+      box-shadow: 0 2px 10px #0001, 0 1px 3px #1860c220;
+      margin-bottom: 1.22rem;
+      padding: 1.08rem 1.16rem;
       transition: box-shadow .18s;
+      border: 1px solid #e9f1fc;
     }
-    .qa:active, .qa:focus-within { box-shadow: 0 2px 20px #1860c225; }
+    .qa:active, .qa:focus-within { box-shadow: 0 2px 18px #1860c225; }
     .question {
-      color: #1860c2; font-size: 1.21em; margin-bottom: 7px; font-weight: 600;
-      text-decoration: none; display: block;
+      color: #1860c2; font-size: 1.15em; margin-bottom: 3px; font-weight: 600;
+      text-decoration: none; display: block; padding: 0;
     }
 
-    /* --- Responsive mobile improvements --- */
+    /* Mobile Responsive */
     @media (max-width: 700px) {
-      .navbar-title { font-size: 1.04em; }
-      h1 { font-size: 1.34rem; }
-      #search { max-width: 98vw; font-size: 1.15em; padding: 16px; }
-      .qa-list { max-width: 99vw; }
-      .qa { padding: 1.12rem 0.75rem; }
-      .question { font-size: 1.09em; }
+      .navbar-title { font-size: 1em; }
       .navbar { height: 48px; }
-      .drawer { width: 69vw; min-width: 156px; max-width: 260px; }
-      .drawer.open { box-shadow: 2px 0 22px #0002; }
-      .navbar .hamburger { font-size: 1.23em; width: 30px; left: 36px;}
-      .navbar .back-btn { font-size: 1.2em; left: 6px; }
+      .hamburger { font-size: 1.3em; width: 28px; height: 28px; margin-left: 2px;}
+      .back-btn { font-size: 1em; margin-right: 6px;}
+      #search { max-width: 99vw; font-size: 1em; padding: 12px; margin-top: 18px;}
+      .qa-list { max-width: 99vw; }
+      .qa { padding: 0.9rem 0.6rem; }
+      .question { font-size: 1em; }
+      .drawer { width: 69vw; min-width: 156px; max-width: 240px; }
+      .navbar-title { margin-right: 28px; }
     }
     @media (max-width: 400px) {
-      .navbar-title { font-size: 0.98em; }
-      h1 { font-size: 1.11rem; }
-      .question { font-size: 1em; }
-      #search { font-size: 0.98em; }
+      .navbar-title { font-size: 0.92em; }
+      #search { font-size: 0.96em; }
+      .question { font-size: 0.97em; }
     }
   </style>
 </head>
 <body>
   <!-- NAV BAR -->
   <div class="navbar">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open Menu">&#9776;</button>
     <button class="back-btn" onclick="window.location.href='https://petitek.com'">
-      <!-- simple chevron icon SVG -->
-      <svg width="22" height="22" viewBox="0 0 20 20" fill="none" style="vertical-align:middle;">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="vertical-align:middle;">
         <path d="M12.9 16.3a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 0 1 1.4 1.4L8.42 10l4.48 4.48a1 1 0 0 1 0 1.42z" fill="#1860c2"/>
       </svg>
-      Back
+      <span>Back</span>
     </button>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Open Menu">&#9776;</button>
     <span class="navbar-title">ChatrBox FAQ</span>
   </div>
 
@@ -163,12 +164,9 @@
   <nav class="drawer" id="drawerMenu" tabindex="-1">
     <a href="https://petitek.com/support">Support</a>
     <a href="https://petitek.com/learn">Learn</a>
-    <!-- Add more links if needed -->
   </nav>
 
   <!-- Main page content -->
-  <h1 style="display:none">ChatrBox FAQ</h1> <!-- visually hidden, title now in nav -->
-
   <input type="text" id="search" placeholder="Search questions..." autocomplete="off" />
   <div id="qa-list" class="qa-list"></div>
 
