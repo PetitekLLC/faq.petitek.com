@@ -205,120 +205,682 @@
       No questions match your search. Try a different word.
     </div>
   </main>
-<script>
-// Static FAQs (you can tweak wording anytime)
-const faqs = [
-  {
-    category: "Getting Started",
-    question: "What is ChatrBox?",
-    answer: "ChatrBox is a smart, motion-activated pet trainer that plays your recorded voice or alert tones when your pet enters a protected area. It helps you train your pet even when you’re not in the room."
-  },
-  {
-    category: "Getting Started",
-    question: "What comes in the box?",
-    answer: "Each ChatrBox includes the ChatrBox unit, a Focus Shield, Quick Start Guide, and packaging with QR codes that link to setup videos and product registration."
-  },
-  {
-    category: "Power & Batteries",
-    question: "What type of batteries does ChatrBox use?",
-    answer: "ChatrBox uses four AAA alkaline batteries. For best performance and battery life, use fresh, name-brand alkaline batteries only."
-  },
-  {
-    category: "Power & Batteries",
-    question: "How long do the batteries last?",
-    answer: "Battery life depends on how often ChatrBox triggers. With typical use (a few triggers per day), you can usually expect several weeks of operation before batteries need to be replaced."
-  },
-  {
-    category: "Range & Detection",
-    question: "How far can ChatrBox detect motion?",
-    answer: "ChatrBox can detect motion up to about 20 feet in a wide cone. You can narrow this detection area using the included Focus Shields."
-  },
-  {
-    category: "Range & Detection",
-    question: "What are Focus Shields and why would I use them?",
-    answer: "Focus Shields narrow the motion detection area so you can protect a very specific spot—like part of a sofa, a doorway, a plant, or a trash can—without triggering on movement further away."
-  },
-  {
-    category: "Recording & Sounds",
-    question: "Can I record my own voice?",
-    answer: "Yes. ChatrBox is designed around your voice. You can record custom messages that play back when your pet triggers the sensor."
-  },
-  {
-    category: "Recording & Sounds",
-    question: "Can I change the recording later?",
-    answer: "Yes. You can re-record and replace your message anytime. Just follow the recording instructions in the Quick Start Guide or video tutorials."
-  },
-  {
-    category: "Placement & Use",
-    question: "Where should I place ChatrBox for best results?",
-    answer: "Place ChatrBox so the sensor faces the area you want to protect, at roughly your pet’s head height. Aim so the detection area covers only the “no-go” zone to reduce false triggers."
-  },
-  {
-    category: "Placement & Use",
-    question: "Can I use ChatrBox for more than one area?",
-    answer: "You can move ChatrBox between locations whenever you like. Many users start in the most important area (like a couch or trash can) and then move it as their pet learns."
-  },
-  {
-    category: "Troubleshooting",
-    question: "ChatrBox isn’t triggering—what should I check?",
-    answer: "First, confirm the power is on and batteries are fresh. Make sure the sensor is pointed toward the area where your pet approaches, and ensure nothing is blocking the sensor or Focus Shield."
-  },
-  {
-    category: "Troubleshooting",
-    question: "Why is ChatrBox triggering too often or at the wrong time?",
-    answer: "Try aiming the sensor slightly lower or higher, or use a narrower Focus Shield. Also check that it isn’t picking up motion from walkways, windows, or TVs in the background."
-  }
-];
 
-// Simple render function
-function renderFaqs() {
-  const container = document.getElementById("faq-container");
-  if (!container) return;
+  <script>
+    /* FULL STATIC FAQ LIST */
+    const faqs = [
+      /* === Product Basics & Hardware === */
+      {
+        category: "Product Basics & Hardware",
+        question: "What does the motion sensor on ChatrBox do, and how does it detect my pet?",
+        answer: `The front motion sensor detects your pet’s movement by sensing subtle changes in body heat as your pet moves through cooler air. When your pet enters the detection zone you’ve set, ChatrBox automatically plays your recorded command to guide or correct their behavior.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "Why does ChatrBox use yellow and blue LED lights?",
+        answer: `Dogs and most pets can see yellow and blue but are colorblind to reds and greens. These LED colors stand out to them and help draw their attention to your message, improving communication during training.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "What do the LED lights indicate during operation?",
+        answer: `The LEDs flash during motion-triggered events and also serve as visual indicators when ChatrBox is powering on, recording, or in Detection Pause / setup modes.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "What is Detection Pause Mode?",
+        answer: `Detection Pause Mode temporarily disables triggering while you’re positioning or aiming the device. A pulsing blue LED indicates the unit is powered on but paused. You can unpause detection when you’re ready for ChatrBox to start monitoring your pet.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "Where is the speaker located, and what does it do?",
+        answer: `A built-in speaker on the front plays your recorded command and system prompts that guide you through setup and use. It’s designed for clear, consistent audio output.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "Where are the control buttons, and what are they used for?",
+        answer: `The control buttons are located on the front of the unit. They let you power the device on or off, record voice messages, adjust volume, switch between training modes, and access advanced features.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "Does ChatrBox have a built-in microphone?",
+        answer: `Yes. A built-in microphone allows you to record custom voice commands up to 20 seconds long.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "What powers ChatrBox?",
+        answer: `ChatrBox can be powered by four AAA batteries (included) or a USB-C cable (included) connected to any standard 5V USB wall adapter (not included).`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "How long do the batteries last?",
+        answer: `Under typical use, four AAA batteries last up to about 90 days and hundreds of training events.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "How do I install the batteries?",
+        answer: `1. Remove the back battery cover using a coin to gently pry it loose.
+2. Follow the orientation markings inside the compartment.
+3. Insert all four AAA batteries.
+4. Snap the cover back into place until it clicks.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "How do I power on ChatrBox?",
+        answer: `Press and hold the Power button for several seconds until you hear “Power On.” The blue LED will begin pulsing, indicating the device is on and in Detection Pause Mode.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "Can I use ChatrBox indefinitely by plugging it in?",
+        answer: `Yes. When connected to a 5V DC USB wall adapter via the USB-C cable, ChatrBox can run continuously without relying on batteries.`
+      },
+      {
+        category: "Product Basics & Hardware",
+        question: "What is the removable stand used for?",
+        answer: `The removable stand on the bottom attaches using universal mount hardware so you can mount ChatrBox on tripods, universal brackets, or other accessories. This helps with precise placement during training.`
+      },
 
-  container.innerHTML = "";
+      /* === Recording Your Commands === */
+      {
+        category: "Recording Your Commands",
+        question: "How do I record a message for my pet?",
+        answer: `1. Press and hold the Record button.
+2. You’ll hear the prompt: “Record Message.”
+3. Speak clearly 10–12 inches from the device in the same tone you use when talking to your pet.
+4. Release the Record button when finished.
 
-  faqs.forEach(faq => {
-    const card = document.createElement("div");
-    card.className = "faq-item";
+A red LED lights up while recording is active.`
+      },
+      {
+        category: "Recording Your Commands",
+        question: "How long can my recording be?",
+        answer: `You can record messages up to 20 seconds long, but short, firm, consistent commands usually work best.`
+      },
+      {
+        category: "Recording Your Commands",
+        question: "What types of messages work best?",
+        answer: `Simple, natural commands such as:
+• “No.”
+• “Off the couch, Buster.”
+• “Out of the kitchen, Max.”
 
-    card.innerHTML = `
-      <div class="faq-category">${faq.category}</div>
-      <button class="faq-question" type="button">
-        ${faq.question}
-        <span class="faq-toggle">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>${faq.answer}</p>
-      </div>
-    `;
+Short phrases you’d normally say to your pet are most effective.`
+      },
+      {
+        category: "Recording Your Commands",
+        question: "How do I listen to my recording?",
+        answer: `After recording, ChatrBox automatically plays your message back once. You can replay it anytime by double-pressing the Record button.`
+      },
+      {
+        category: "Recording Your Commands",
+        question: "How do I redo a message if I don’t like the first one?",
+        answer: `Just record a new message using the same steps. ChatrBox automatically replaces the previous recording—there’s no need to delete anything manually.`
+      },
+      {
+        category: "Recording Your Commands",
+        question: "How do I know if my message recorded correctly?",
+        answer: `A red LED lights during recording, and the device plays the message when it’s saved. You can double-press the Record button to replay and confirm clarity.`
+      },
+      {
+        category: "Recording Your Commands",
+        question: "What’s the best way to make sure my message is effective?",
+        answer: `Speak clearly 10–12 inches from the microphone, use your natural correction tone, keep the message short and consistent, and replay it to ensure it’s easy for your pet to recognize.`
+      },
+      {
+        category: "Recording Your Commands",
+        question: "What happens after I finish recording?",
+        answer: `Your message is saved automatically and becomes the active training command. From there you can adjust playback volume, choose a training mode, and fine-tune the detection area with aiming and Focus Shields.`
+      },
 
-    const questionBtn = card.querySelector(".faq-question");
-    const answerEl = card.querySelector(".faq-answer");
-    const toggleEl = card.querySelector(".faq-toggle");
+      /* === Training Modes & Behavior Control === */
+      {
+        category: "Training Modes & Behavior Control",
+        question: "How many training modes does ChatrBox have?",
+        answer: `ChatrBox has three distinct training modes. You can switch between them by quickly pressing the Record button, which changes how ChatrBox responds when your pet enters the detection area.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "How does ChatrBox respond when my pet enters the detection zone?",
+        answer: `Depending on the selected mode, ChatrBox may respond with flashing LED lights, your recorded voice command, attention-getting sound effects, or a combination of these. The exact response pattern depends on the training mode.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "What is Training Mode One?",
+        answer: `Training Mode One is the default and most assertive correction mode. On the first detection, LEDs flash blue/yellow and your voice command plays. If your pet stays in the area, ChatrBox escalates by adding attention-grabbing sound effects plus your command. If they still remain, a stronger sequence of sound effects and your voice plays. Escalations can repeat up to five cycles before ChatrBox resets.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "Who is Training Mode One best for?",
+        answer: `Mode One is ideal for new training situations, stubborn or persistent behaviors, pets that ignore softer corrections, and pets that linger around off-limits areas. Most pets respond within the first or second alert; the third almost always works.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "How many times can ChatrBox escalate in Mode One?",
+        answer: `Mode One can escalate up to five times before automatically resetting to normal monitoring mode.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "What happens when my pet finally leaves the detection area?",
+        answer: `At any stage in any mode, all lights, sound effects, and voice commands stop instantly once your pet exits the detection zone.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "What is Training Mode Two?",
+        answer: `Training Mode Two uses a gentler approach. It plays a calm alert tone with no flashing lights and no voice command, making it ideal for pets that already know the rules but occasionally need a reminder.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "When should I use Training Mode Two?",
+        answer: `Mode Two is best for maintenance training, pets that no longer need strong correction, situations where you prefer a subtle deterrent, or when you want to reduce overstimulation in sensitive pets.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "What is Training Mode Three?",
+        answer: `Training Mode Three focuses entirely on your recorded voice. It plays your command only—no flashing lights and no alert tones—making it ideal for pets that respond reliably to your voice alone.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "Can Training Mode Three be used for positive reinforcement?",
+        answer: `Yes. You can record calming or encouraging messages such as “Good girl, Daisy—you’re a good girl!” ChatrBox can then play your message to reassure or reward your pet even when you’re not home.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "Which mode is best for new pets or stubborn behaviors?",
+        answer: `Training Mode One, because it provides escalating correction for firm behavioral reinforcement.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "Which mode is best for pets that already know the rules?",
+        answer: `Training Mode Two, which offers a gentle reminder without overstimulation.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "Which mode is best for pets that respond primarily to voice?",
+        answer: `Training Mode Three, since it plays only your recorded command.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "How do I change the training mode?",
+        answer: `Short-press the Record button. Each press cycles to the next mode. The system announces “Training Mode One,” “Training Mode Two,” or “Training Mode Three.” Stop pressing when you hear the mode you want.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "Does ChatrBox remember the last training mode I selected?",
+        answer: `Yes. ChatrBox stays in the selected mode until you change it again, even if you power the device off and back on.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "How can I confirm which mode is active?",
+        answer: `You can manually trigger the device and observe its response: lights + voice + escalation indicate Mode One, alert tone only indicates Mode Two, and voice-only playback indicates Mode Three.`
+      },
+      {
+        category: "Training Modes & Behavior Control",
+        question: "Does ChatrBox still monitor the area between alerts?",
+        answer: `Yes. After each alert sequence, ChatrBox checks whether your pet has left the detection zone. If they have, it resets and returns to normal monitoring.`
+      },
 
-    questionBtn.addEventListener("click", () => {
-      const isOpen = answerEl.classList.contains("open");
-      if (isOpen) {
-        answerEl.classList.remove("open");
-        answerEl.style.maxHeight = null;
-        toggleEl.textContent = "+";
-      } else {
-        answerEl.classList.add("open");
-        answerEl.style.maxHeight = answerEl.scrollHeight + "px";
-        toggleEl.textContent = "−";
+      /* === Volume Control & Sound Quality === */
+      {
+        category: "Volume Control & Sound Quality",
+        question: "How many volume levels does ChatrBox have?",
+        answer: `ChatrBox has five adjustable volume levels, from Level 1 (lowest) to Level 5 (highest).`
+      },
+      {
+        category: "Volume Control & Sound Quality",
+        question: "How do I change the volume on ChatrBox?",
+        answer: `Use the Volume button on the device. Each click changes the volume level one step at a time.`
+      },
+      {
+        category: "Volume Control & Sound Quality",
+        question: "How does the volume cycle work?",
+        answer: `The volume cycles in a “zig-zag” pattern: as it moves up, it goes Level 1 → 2 → 3 → 4 → 5. The next click moves it down 5 → 4 → 3 → 2 → 1. From Level 1, it starts moving up again. This lets you fine-tune the volume without looping all the way around.`
+      },
+      {
+        category: "Volume Control & Sound Quality",
+        question: "How do I know which volume level I’m on?",
+        answer: `After each click, ChatrBox announces the current setting with a voice prompt such as “Volume Level 4” or “Volume Level 5.”`
+      },
+      {
+        category: "Volume Control & Sound Quality",
+        question: "Does the system voice change loudness with the volume level?",
+        answer: `Yes. The system voice gets louder or softer with each change, giving you a real-time preview of how loud your training message will sound at that level.`
+      },
+      {
+        category: "Volume Control & Sound Quality",
+        question: "What determines how loud my pet hears the message?",
+        answer: `Two factors: how loudly or softly you recorded your voice command, and the volume level you select (1–5) on ChatrBox. A naturally loud recording at a high volume will sound much stronger than a soft recording at a low level.`
+      },
+      {
+        category: "Volume Control & Sound Quality",
+        question: "What if my recorded message sounds too loud or distorted?",
+        answer: `If your message sounds harsh or distorted, lower the ChatrBox volume level and consider re-recording your message at a normal speaking level. You want the sound clear and crisp, not harsh.`
+      },
+      {
+        category: "Volume Control & Sound Quality",
+        question: "Do I need to shout when recording my command?",
+        answer: `No. Dogs and cats hear much better than humans. Shouting can be unpleasant or overwhelming. Use a clear, firm, confident tone instead of raising your voice.`
+      },
+      {
+        category: "Volume Control & Sound Quality",
+        question: "What kind of voice tone works best for training?",
+        answer: `Pets respond best to clear, confident, and consistent cues. Your tone and intonation matter more than raw volume. Speak the way you normally correct your pet in person.`
+      },
+      {
+        category: "Volume Control & Sound Quality",
+        question: "Why is it important to test the volume?",
+        answer: `Testing ensures your message is loud enough for your pet to hear, not so loud that it’s uncomfortable, and free of distortion. This makes training more effective and less stressful for your pet.`
+      },
+
+      /* === Aiming, Placement & Coverage === */
+      {
+        category: "Aiming, Placement & Coverage",
+        question: "What is the detection range of ChatrBox?",
+        answer: `ChatrBox can detect motion up to about 20 feet away, making it suitable for small rooms, larger rooms, and open areas in your home.`
+      },
+      {
+        category: "Aiming, Placement & Coverage",
+        question: "What does the detection zone look like?",
+        answer: `Think of the detection zone as an invisible cone that is narrow near the device and widens as it extends outward. The farther the target area is from the device, the wider the coverage; the closer it is, the tighter and more focused the detection zone.`
+      },
+      {
+        category: "Aiming, Placement & Coverage",
+        question: "How high should I place ChatrBox?",
+        answer: `For best results, place ChatrBox at approximately your pet’s eye level and aim it toward the area where unwanted behavior occurs.`
+      },
+      {
+        category: "Aiming, Placement & Coverage",
+        question: "How should I position ChatrBox to protect furniture?",
+        answer: `If your pet jumps on furniture when you’re away, you can place ChatrBox 2–3 feet in front of the furniture, angled slightly upward toward the path they use, or place it directly on the seat cushion pointing toward where your pet usually jumps up. Both positions are effective.`
+      },
+      {
+        category: "Aiming, Placement & Coverage",
+        question: "How do I use ChatrBox for indoor bathroom accidents?",
+        answer: `Place ChatrBox a few feet away from the problem area where your pet tends to go. When your pet approaches, the motion sensor detects movement and plays your recorded message before they reach the spot, helping prevent repeat accidents.`
+      },
+      {
+        category: "Aiming, Placement & Coverage",
+        question: "How do I protect larger areas like a living room or kitchen?",
+        answer: `Aim ChatrBox toward main entry paths such as doorways, hall entries, or pathways your pet uses to enter. This lets ChatrBox catch your pet as they enter, stopping them before they go deeper into the room or repeat bad behavior.`
+      },
+      {
+        category: "Aiming, Placement & Coverage",
+        question: "Can I use ChatrBox to cover very large or open spaces?",
+        answer: `Yes. You can move ChatrBox farther back to widen the coverage, or use two units to overlap detection cones for better coverage in large or irregular spaces.`
+      },
+      {
+        category: "Aiming, Placement & Coverage",
+        question: "Does ChatrBox work well with cats too?",
+        answer: `Yes. Place it on or near countertops where your cat likes to jump, or near furniture or posts they like to claw, and aim it along their usual path. ChatrBox will trigger before your cat reaches the problem area, interrupting the behavior and helping them learn to avoid those spots over time.`
+      },
+
+      /* === Focus Shields & Fine-Tuning === */
+      {
+        category: "Focus Shields & Fine-Tuning",
+        question: "What are Focus Shields, and what do they do?",
+        answer: `Focus Shields are snap-on accessories that shape and narrow the detection zone. They help concentrate detection on specific problem areas and block surrounding spaces that might otherwise cause false triggers.`
+      },
+      {
+        category: "Focus Shields & Fine-Tuning",
+        question: "What is the Sideview Shield used for?",
+        answer: `The Sideview Shield blocks detection from one side. It’s ideal when ChatrBox is near walls, doors, windows, or nearby areas you don’t want monitored. It prevents unwanted activations from motion or heat sources on the blocked side while maintaining full detection toward your training zone.`
+      },
+      {
+        category: "Focus Shields & Fine-Tuning",
+        question: "What is the Narrow View Shield used for?",
+        answer: `The Narrow View Shield is best for small, specific targets like plants, individual pieces of furniture, decorative objects, or small training zones. It creates a tight, focused detection area so nearby movement doesn’t set off the sensor.`
+      },
+      {
+        category: "Focus Shields & Fine-Tuning",
+        question: "How do I attach or use the Focus Shields?",
+        answer: `Each shield snaps onto the front of the device. You can try different shields, adjust angles and distance, and experiment to find the most effective setup for your room and your pet’s habits.`
+      },
+      {
+        category: "Focus Shields & Fine-Tuning",
+        question: "How can I reduce false triggers?",
+        answer: `To minimize false triggers, adjust ChatrBox’s distance, height, and angle; use Focus Shields to block unwanted areas; and avoid pointing the device directly at windows, mirrors, fireplaces, or HVAC vents.`
+      },
+      {
+        category: "Focus Shields & Fine-Tuning",
+        question: "Why should I avoid aiming ChatrBox at windows or vents?",
+        answer: `The infrared sensor is sensitive to bright sunlight, glare or reflections, and warm or cool air from vents. These can change the ambient temperature suddenly and cause false detection events.`
+      },
+      {
+        category: "Focus Shields & Fine-Tuning",
+        question: "How do I refine the detection zone over time?",
+        answer: `As you use ChatrBox, you’ll naturally tweak the distance from the target area, height relative to your pet, and angle of the device. Combined with Focus Shields, this lets you create precise detection zones that match your training goals.`
+      },
+
+      /* === Arming & Detection Unpause === */
+      {
+        category: "Arming & Detection Unpause",
+        question: "What does it mean to “unpause” detection?",
+        answer: `Unpausing detection arms ChatrBox so it begins actively monitoring your training area for motion.`
+      },
+      {
+        category: "Arming & Detection Unpause",
+        question: "How do I unpause detection and arm ChatrBox?",
+        answer: `Press the Power button once (a short press). You’ll hear the prompt “Detection Unpaused,” and a white LED begins flashing in a countdown for about 10 seconds.`
+      },
+      {
+        category: "Arming & Detection Unpause",
+        question: "What is the purpose of the 10-second countdown?",
+        answer: `The countdown gives you time to step out of the detection zone and avoid triggering the device yourself. When the countdown ends, ChatrBox becomes fully active.`
+      },
+      {
+        category: "Arming & Detection Unpause",
+        question: "What happens after the countdown ends?",
+        answer: `Once the countdown finishes, ChatrBox scans the area for movement. If your pet enters the coverage zone, the device automatically triggers your programmed training response, including your recorded voice command, any active alert sounds, and any enabled light effects, depending on the selected mode.`
+      },
+
+      /* === Pre-Training & Wi-Fi Control === */
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "What is pre-training with ChatrBox?",
+        answer: `Pre-training is a phase where you manually trigger ChatrBox while you’re present with your pet. You correct unwanted behavior in real time and then reward your pet when they respond correctly. This teaches your pet what your commands mean before ChatrBox operates automatically.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "Why is pre-training important?",
+        answer: `Pre-training helps your pet understand your recorded command, associate it with specific behaviors (like not jumping on the couch), and connect correction with positive rewards. This creates a strong link between your voice, the correction, and the reward, making automatic training more effective.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "When is pre-training most useful?",
+        answer: `Pre-training works best in situations you can see directly or monitor nearby, such as when your pet enters a restricted room, approaches the trash can, or heads toward the couch, countertops, or kitchen. You watch for the behavior to begin, then trigger ChatrBox at the right moment.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "How does manual triggering help my pet learn?",
+        answer: `When you see unwanted behavior starting, you tap the Train button on your phone or tablet. ChatrBox plays your recorded command (and any sound cues), your pet stops or moves away, and you reward them with praise or a treat. This real-time correction and reward pattern accelerates learning and builds strong habits.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "How do I manually trigger ChatrBox from my phone or tablet?",
+        answer: `Connect your phone or tablet to ChatrBox’s Wi-Fi network, open the ChatrBox Training web page, and press the Train button. Each press plays your recorded message and alert on demand.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "How do I put ChatrBox into Wi-Fi connection mode?",
+        answer: `Press and hold the Volume button until you hear “Connect to Wi-Fi.” A blue LED will light and begin pulsing, indicating ChatrBox is now in Wi-Fi connection mode.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "How do I connect my phone or tablet to ChatrBox’s Wi-Fi network?",
+        answer: `On your phone or tablet, open Settings and go to Wi-Fi. Look for the network named “ChatrBox” and select it to connect. You’ll hear “Wi-Fi connected” followed by “Detection UnPaused,” while a white LED flashes in a brief countdown pattern.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "What happens after my device connects to the ChatrBox Wi-Fi?",
+        answer: `Once connected, a ChatrBox Training page automatically opens in your web browser. You’ll see two main buttons—Train and End—and you have full remote control over the trainer.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "Does motion detection stay active while I’m using Wi-Fi control?",
+        answer: `During the Wi-Fi connection period, automatic motion detection is paused so you remain in full control of when ChatrBox triggers. You decide exactly when to deliver corrections.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "What does the Train button do?",
+        answer: `Each time you press Train on the ChatrBox Training page, ChatrBox plays your recorded voice command and any accompanying sound cues (based on the selected mode). This lets you deliver corrections precisely when your pet starts an unwanted behavior.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "How should I position ChatrBox during pre-training?",
+        answer: `Place and aim ChatrBox at or near your training target area, such as the kitchen entrance, a couch or chair, a trash can, or a doorway or hallway. Watch your pet closely and tap Train when they move toward that area.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "How do I reward my pet during pre-training?",
+        answer: `When your pet responds correctly by stopping, turning away, or leaving the area, praise them verbally and optionally offer a small treat. This reinforces that responding to your command is the correct behavior.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "Does every behavior need pre-training?",
+        answer: `No. Some behaviors may not occur when you’re home or watching. For those, ChatrBox can still train automatically by responding whenever your pet enters the detection zone. Pre-training is a booster for behaviors you can observe live; automatic operation handles the rest.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "How does pre-training help once ChatrBox runs automatically?",
+        answer: `After a few guided sessions, your pet learns what your command means, automatic triggers feel familiar rather than new, and your pet responds more quickly and naturally even when you’re not in the room. ChatrBox then maintains consistency by delivering your command whenever the behavior occurs.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "How do I end Wi-Fi control and return to normal operation?",
+        answer: `When you’re finished pre-training, press the End button on the ChatrBox Training page. You’ll hear a system prompt confirming the change, and ChatrBox exits Wi-Fi control and returns to standard operation.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "Does ChatrBox automatically re-arm after I press End?",
+        answer: `Yes. After you tap End, ChatrBox automatically re-arms itself for normal detection mode, resumes monitoring the target area, and responds whenever your pet enters the detection zone using your recorded command and chosen training mode.`
+      },
+      {
+        category: "Pre-Training & Wi-Fi Control",
+        question: "What happens after pre-training is complete?",
+        answer: `From that point on, ChatrBox monitors your pet’s training area automatically. It triggers your command and alerts whenever your pet enters the detection zone, and your pet responds based on what they learned during pre-training and ongoing repetition.`
+      },
+
+      /* === Success Tips & Overall Purpose === */
+      {
+        category: "Success Tips & Overall Purpose",
+        question: "What are the key steps I should know after completing the tutorial?",
+        answer: `By the end of setup and training, you should be comfortable positioning and aiming ChatrBox, installing batteries and powering on, recording custom voice commands, adjusting volume levels, choosing and using training modes, connecting via Wi-Fi for pre-training, and manually triggering and ending training sessions.`
+      },
+      {
+        category: "Success Tips & Overall Purpose",
+        question: "What is the most important factor for long-term success with ChatrBox?",
+        answer: `Consistency and positive reinforcement. Use ChatrBox regularly, reward good behavior, and use clear, consistent commands. Over time, your pet will respond naturally to your voice and boundaries, even when you’re not in the room.`
+      },
+      {
+        category: "Success Tips & Overall Purpose",
+        question: "What is ChatrBox ultimately designed to do for me and my pet?",
+        answer: `ChatrBox is designed to make training simple, effective, and rewarding. It provides easy setup and intuitive controls, targeted cues and consistent repetition, and helps create a calmer home with clearer boundaries and better behavior—supporting gentle, lasting habits that work for both you and your pet.`
+      },
+
+      /* === Power, Batteries & Troubleshooting === */
+      {
+        category: "Power, Batteries & Troubleshooting",
+        question: "How do I check the battery level on ChatrBox?",
+        answer: `Double-press (quickly click twice) the Power (PWR) button.
+• Green = Battery level is good.
+• Yellow = Time to replace the batteries soon.
+• Red = Low battery; the unit may not operate correctly and batteries should be replaced immediately.`
+      },
+      {
+        category: "Power, Batteries & Troubleshooting",
+        question: "What do the battery indicator colors mean?",
+        answer: `• Green: Safe to use, plenty of power remaining.
+• Yellow: The unit still works, but you’re in the caution zone—plan to change batteries.
+• Red: Batteries are very low and the trainer may not power on or operate reliably. Replace all four AAA batteries as a set.`
+      },
+      {
+        category: "Power, Batteries & Troubleshooting",
+        question: "How do I reset ChatrBox?",
+        answer: `ChatrBox does not have a dedicated reset button. To reset the device:
+1. Remove at least one battery.
+2. Wait about 10 seconds.
+3. Reinsert the battery (make sure all four are installed correctly).
+
+This power cycle resets the internal hardware.`
+      },
+      {
+        category: "Power, Batteries & Troubleshooting",
+        question: "What should I do if I press and hold the PWR button and ChatrBox does not turn on?",
+        answer: `If ChatrBox doesn’t power on:
+1. Check the battery level by double-pressing the PWR button and confirm it’s not in the red.
+2. Reset the device by removing a battery, waiting 10 seconds, and reinstalling it.
+3. Press and hold the PWR button longer than usual until you hear “Power On” and see the blue LED begin pulsing.`
+      },
+      {
+        category: "Power, Batteries & Troubleshooting",
+        question: "Why does my ChatrBox power on but not trigger?",
+        answer: `This happens when the device is in Detection Pause Mode. A pulsing blue LED indicates the system is on but paused. Press the Power button once to unpause detection and begin the 10-second arming countdown.`
+      },
+      {
+        category: "Power, Batteries & Troubleshooting",
+        question: "Why is my ChatrBox not responding to motion?",
+        answer: `Common causes:
+• Device still in Wi-Fi control mode
+• Device aimed too high/low or outside the pet’s approach path
+• Bright sunlight or HVAC airflow interfering with infrared detection
+• Batteries are too low (yellow/red)`
+      },
+      {
+        category: "Power, Batteries & Troubleshooting",
+        question: "Why does my ChatrBox keep triggering when nothing is there?",
+        answer: `False triggers may occur if the PIR sensor is facing:
+• Direct sunlight
+• HVAC vents
+• Mirrors or reflective surfaces
+• Warm appliances
+
+Use a Focus Shield or re-aim slightly.`
+      },
+      {
+        category: "Power, Batteries & Troubleshooting",
+        question: "Does ChatrBox turn itself off automatically?",
+        answer: `No. ChatrBox remains powered on until manually powered off or batteries run out.`
+      },
+
+      /* === Sound, Messages & Behavior === */
+      {
+        category: "Sound, Messages & Behavior",
+        question: "How many messages can I store at once?",
+        answer: `ChatrBox stores only one recorded command at a time. Recording a new message automatically replaces the previous one.`
+      },
+      {
+        category: "Sound, Messages & Behavior",
+        question: "Can I save multiple messages for different behaviors?",
+        answer: `Not at this time. ChatrBox plays your single recorded command in whichever training mode you choose.`
+      },
+      {
+        category: "Sound, Messages & Behavior",
+        question: "Why does my message sound different during playback?",
+        answer: `Your message may sound slightly louder or softer depending on the volume level and how closely you spoke into the microphone. Re-record if the tone or clarity isn’t ideal.`
+      },
+
+      /* === LED Light Indicators === */
+      {
+        category: "LED Light Indicators",
+        question: "What does the pulsing blue light mean?",
+        answer: `ChatrBox is powered on but in Detection Pause Mode.`
+      },
+      {
+        category: "LED Light Indicators",
+        question: "What does the flashing white light mean?",
+        answer: `Detection has been unpaused and the device is performing the 10-second arming countdown.`
+      },
+      {
+        category: "LED Light Indicators",
+        question: "Why are the LEDs flashing during activation?",
+        answer: `In Training Mode One, the blue/yellow LEDs flash as a visual cue to draw your pet’s attention and reinforce the correction.`
+      },
+
+      /* === Wi-Fi Connection & Manual Training === */
+      {
+        category: "Wi-Fi Connection & Manual Training",
+        question: "Why does ChatrBox broadcast its own Wi-Fi network?",
+        answer: `The Wi-Fi network allows you to manually trigger ChatrBox for pre-training, adjust behavior, and observe corrections while you are present.`
+      },
+      {
+        category: "Wi-Fi Connection & Manual Training",
+        question: "Does ChatrBox connect to my home Wi-Fi router?",
+        answer: `No. ChatrBox creates its own Wi-Fi hotspot for manual training only. It does not connect to your home router or require internet.`
+      },
+      {
+        category: "Wi-Fi Connection & Manual Training",
+        question: "Is Wi-Fi required for automatic operation?",
+        answer: `No. Wi-Fi is used only for pre-training. Automatic motion-based triggering works offline.`
+      },
+      {
+        category: "Wi-Fi Connection & Manual Training",
+        question: "Does connecting to Wi-Fi drain the battery?",
+        answer: `Yes, slightly more than normal operation. Manual Wi-Fi control is intended for short pre-training sessions, not long-term use.`
+      },
+
+      /* === Aiming, Coverage & Placement (short) === */
+      {
+        category: "Aiming, Coverage & Placement",
+        question: "Where should I NOT place ChatrBox?",
+        answer: `Avoid placing it:
+• Directly facing windows
+• Near heat vents or air conditioners
+• Opposite mirrors or reflective surfaces
+• In direct sunlight
+
+These cause heat variations that may confuse the infrared sensor.`
+      },
+      {
+        category: "Aiming, Coverage & Placement",
+        question: "Can ChatrBox detect through glass or cages?",
+        answer: `No. PIR sensors cannot detect heat movement through glass, plastic barriers, or closed crate doors.`
+      },
+      {
+        category: "Aiming, Coverage & Placement",
+        question: "Will ChatrBox work outdoors?",
+        answer: `ChatrBox is intended for indoor use. Sunlight, temperature swings, and wind movement can interfere with infrared detection.`
+      },
+
+      /* === Behavior & Training Questions === */
+      {
+        category: "Behavior & Training Questions",
+        question: "How long does it take for pets to learn?",
+        answer: `Most pets begin responding within the first few sessions. Full behavior change can take 1–2 weeks of consistent, repeated correction.`
+      },
+      {
+        category: "Behavior & Training Questions",
+        question: "Will my pet become afraid of ChatrBox?",
+        answer: `ChatrBox is designed for corrective cues, not fear-based training. Use calm, confident voice tone and reward proper behavior to maintain a positive association.`
+      },
+      {
+        category: "Behavior & Training Questions",
+        question: "Does ChatrBox work for multiple pets?",
+        answer: `Yes. It triggers based on motion and heat, not identity. Both pets will hear the same message unless physically separated.`
+      },
+
+      /* === Maintenance, Cleaning & Safety === */
+      {
+        category: "Maintenance, Cleaning & Safety",
+        question: "How do I clean ChatrBox?",
+        answer: `Wipe the exterior with a dry or slightly damp cloth. Avoid spraying liquids directly onto the sensor or speaker openings.`
+      },
+      {
+        category: "Maintenance, Cleaning & Safety",
+        question: "Is ChatrBox safe for pets’ hearing?",
+        answer: `Yes. Volume Level 1–3 is typically ideal. Avoid long-term use at maximum volume unless necessary for distance or noisy environments.`
+      },
+      {
+        category: "Maintenance, Cleaning & Safety",
+        question: "Is ChatrBox safe to use around children?",
+        answer: `Yes. LEDs and audio cues are safe. Place the unit out of children's reach to avoid tampering.`
+      },
+
+      /* === Bonus FAQs === */
+      {
+        category: "Bonus FAQs",
+        question: "Can I use rechargeable AAA batteries?",
+        answer: `Yes, but performance varies. High-drain alkaline batteries generally last longer and maintain more stable output.`
+      },
+      {
+        category: "Bonus FAQs",
+        question: "Why are my batteries draining faster than expected?",
+        answer: `Common causes:
+• High training activity (frequent triggers)
+• Using Wi-Fi mode for extended periods
+• High volume settings (Level 4–5)
+• Batteries from mixed brands or ages`
+      },
+      {
+        category: "Bonus FAQs",
+        question: "Does ChatrBox save my settings?",
+        answer: `Yes. Volume level, training mode, and your recorded message are saved even if you remove the batteries.`
+      },
+      {
+        category: "Bonus FAQs",
+        question: "Can ChatrBox detect small pets like kittens or small dogs?",
+        answer: `Yes, as long as they emit enough body heat and move within the IR sensor’s field of view.`
       }
-    });
+    ];
 
-    container.appendChild(card);
-  });
-}
-
-document.addEventListener("DOMContentLoaded", renderFaqs);
-</script>
-
-
-
-
+    /* === Accordion + Search Logic === */
     const faqListEl = document.getElementById("faq-list");
     const searchInputEl = document.getElementById("faq-search");
     const noResultsEl = document.getElementById("no-results");
@@ -337,7 +899,7 @@ document.addEventListener("DOMContentLoaded", renderFaqs);
         </button>
         <div class="faq-answer">
           <div class="faq-answer-inner">
-            ${faq.answer}
+            ${faq.answer.replace(/\n/g, "<br>")}
           </div>
         </div>
       `;
@@ -392,4 +954,5 @@ document.addEventListener("DOMContentLoaded", renderFaqs);
   </script>
 </body>
 </html>
+
 
