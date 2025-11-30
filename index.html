@@ -205,114 +205,119 @@
       No questions match your search. Try a different word.
     </div>
   </main>
+<script>
+// Static FAQs (you can tweak wording anytime)
+const faqs = [
+  {
+    category: "Getting Started",
+    question: "What is ChatrBox?",
+    answer: "ChatrBox is a smart, motion-activated pet trainer that plays your recorded voice or alert tones when your pet enters a protected area. It helps you train your pet even when you’re not in the room."
+  },
+  {
+    category: "Getting Started",
+    question: "What comes in the box?",
+    answer: "Each ChatrBox includes the ChatrBox unit, a Focus Shield, Quick Start Guide, and packaging with QR codes that link to setup videos and product registration."
+  },
+  {
+    category: "Power & Batteries",
+    question: "What type of batteries does ChatrBox use?",
+    answer: "ChatrBox uses four AAA alkaline batteries. For best performance and battery life, use fresh, name-brand alkaline batteries only."
+  },
+  {
+    category: "Power & Batteries",
+    question: "How long do the batteries last?",
+    answer: "Battery life depends on how often ChatrBox triggers. With typical use (a few triggers per day), you can usually expect several weeks of operation before batteries need to be replaced."
+  },
+  {
+    category: "Range & Detection",
+    question: "How far can ChatrBox detect motion?",
+    answer: "ChatrBox can detect motion up to about 20 feet in a wide cone. You can narrow this detection area using the included Focus Shields."
+  },
+  {
+    category: "Range & Detection",
+    question: "What are Focus Shields and why would I use them?",
+    answer: "Focus Shields narrow the motion detection area so you can protect a very specific spot—like part of a sofa, a doorway, a plant, or a trash can—without triggering on movement further away."
+  },
+  {
+    category: "Recording & Sounds",
+    question: "Can I record my own voice?",
+    answer: "Yes. ChatrBox is designed around your voice. You can record custom messages that play back when your pet triggers the sensor."
+  },
+  {
+    category: "Recording & Sounds",
+    question: "Can I change the recording later?",
+    answer: "Yes. You can re-record and replace your message anytime. Just follow the recording instructions in the Quick Start Guide or video tutorials."
+  },
+  {
+    category: "Placement & Use",
+    question: "Where should I place ChatrBox for best results?",
+    answer: "Place ChatrBox so the sensor faces the area you want to protect, at roughly your pet’s head height. Aim so the detection area covers only the “no-go” zone to reduce false triggers."
+  },
+  {
+    category: "Placement & Use",
+    question: "Can I use ChatrBox for more than one area?",
+    answer: "You can move ChatrBox between locations whenever you like. Many users start in the most important area (like a couch or trash can) and then move it as their pet learns."
+  },
+  {
+    category: "Troubleshooting",
+    question: "ChatrBox isn’t triggering—what should I check?",
+    answer: "First, confirm the power is on and batteries are fresh. Make sure the sensor is pointed toward the area where your pet approaches, and ensure nothing is blocking the sensor or Focus Shield."
+  },
+  {
+    category: "Troubleshooting",
+    question: "Why is ChatrBox triggering too often or at the wrong time?",
+    answer: "Try aiming the sensor slightly lower or higher, or use a narrower Focus Shield. Also check that it isn’t picking up motion from walkways, windows, or TVs in the background."
+  }
+];
 
-  <script>
-    // STATIC FAQ DATA
-    const faqs = [
-      // Getting Started
-      {
-        category: "Getting Started",
-        question: "What is ChatrBox?",
-        answer:
-          "ChatrBox is a smart, motion-activated pet trainer that plays your recorded voice or alert sounds when your pet enters a protected area. It helps reinforce training even when you’re not in the room."
-      },
-      {
-        category: "Getting Started",
-        question: "What comes in the box?",
-        answer:
-          "Your ChatrBox package includes the ChatrBox device, Focus Shield, Quick Start Guide, and packaging with QR codes that link to setup videos and product registration."
-      },
+// Simple render function
+function renderFaqs() {
+  const container = document.getElementById("faq-container");
+  if (!container) return;
 
-      // Power & Batteries
-      {
-        category: "Power & Batteries",
-        question: "How many batteries does ChatrBox use?",
-        answer:
-          "ChatrBox uses four AAA alkaline batteries. For best performance and battery life, use fresh, name-brand alkaline batteries only."
-      },
-      {
-        category: "Power & Batteries",
-        question: "How long do the batteries last?",
-        answer:
-          "Battery life depends on how often ChatrBox is triggered. With typical use of a few activations per day, you can usually expect several weeks of operation before needing to replace the batteries."
-      },
-      {
-        category: "Power & Batteries",
-        question: "How do I know when the batteries are low?",
-        answer:
-          "As batteries run down, you may notice weaker audio, reduced detection, or inconsistent operation. When this happens, replace all four batteries at the same time."
-      },
+  container.innerHTML = "";
 
-      // Range & Detection
-      {
-        category: "Range & Detection",
-        question: "How far can ChatrBox detect motion?",
-        answer:
-          "In an open space, ChatrBox can detect motion up to about 20 feet in a wide cone. Actual range can vary based on placement, height, and surrounding objects."
-      },
-      {
-        category: "Range & Detection",
-        question: "What are Focus Shields and why would I use them?",
-        answer:
-          "Focus Shields narrow the motion detection field so you can protect a specific zone—like part of a sofa, a doorway, a trash can, or a houseplant—without triggering on movement in the background."
-      },
+  faqs.forEach(faq => {
+    const card = document.createElement("div");
+    card.className = "faq-item";
 
-      // Recording & Sounds
-      {
-        category: "Recording & Sounds",
-        question: "Can I record my own voice?",
-        answer:
-          "Yes. ChatrBox is designed around your voice. You can record a custom message that plays whenever your pet triggers the sensor. This helps your pet recognize and respond to your familiar voice."
-      },
-      {
-        category: "Recording & Sounds",
-        question: "Can I change the recording later?",
-        answer:
-          "Absolutely. You can re-record and replace your message at any time. Just follow the recording steps in the Quick Start Guide or the online video tutorials."
-      },
+    card.innerHTML = `
+      <div class="faq-category">${faq.category}</div>
+      <button class="faq-question" type="button">
+        ${faq.question}
+        <span class="faq-toggle">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>${faq.answer}</p>
+      </div>
+    `;
 
-      // Placement & Training
-      {
-        category: "Placement & Training",
-        question: "Where should I place ChatrBox for best results?",
-        answer:
-          "Place ChatrBox so the sensor faces the area you want to protect at roughly your pet’s head height. Aim it so the detection cone covers only the problem area to reduce false triggers."
-      },
-      {
-        category: "Placement & Training",
-        question: "Can I move ChatrBox between different areas?",
-        answer:
-          "Yes. Many pet owners start with the most important trouble spot—like a couch or trash can—and then move ChatrBox to new locations as their pet learns which areas are off-limits."
-      },
+    const questionBtn = card.querySelector(".faq-question");
+    const answerEl = card.querySelector(".faq-answer");
+    const toggleEl = card.querySelector(".faq-toggle");
 
-      // Purchasing & Support
-      {
-        category: "Purchasing & Support",
-        question: "Where can I buy ChatrBox?",
-        answer:
-          "ChatrBox is sold online through select retailers such as Amazon. Check the product packaging or our website for current purchasing links."
-      },
-      {
-        category: "Purchasing & Support",
-        question: "How can I get support if I need help?",
-        answer:
-          "Scan the QR codes on the packaging or visit our support page for setup videos, FAQs, troubleshooting tips, and ways to contact customer support."
-      },
-
-      // Troubleshooting
-      {
-        category: "Troubleshooting",
-        question: "ChatrBox isn’t triggering when my pet walks by. What should I check?",
-        answer:
-          "First, confirm that the power is on and the batteries are fresh. Make sure the sensor faces the area where your pet enters, and that the Focus Shield (if installed) isn’t blocking the detection zone."
-      },
-      {
-        category: "Troubleshooting",
-        question: "ChatrBox is triggering too often or at the wrong time. How do I fix that?",
-        answer:
-          "Try aiming the sensor slightly lower or higher, or use a more narrow Focus Shield. Also make sure it isn’t pointed at busy walkways, windows with outside movement, or TVs and other motion sources."
+    questionBtn.addEventListener("click", () => {
+      const isOpen = answerEl.classList.contains("open");
+      if (isOpen) {
+        answerEl.classList.remove("open");
+        answerEl.style.maxHeight = null;
+        toggleEl.textContent = "+";
+      } else {
+        answerEl.classList.add("open");
+        answerEl.style.maxHeight = answerEl.scrollHeight + "px";
+        toggleEl.textContent = "−";
       }
-    ];
+    });
+
+    container.appendChild(card);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", renderFaqs);
+</script>
+
+
+
 
     const faqListEl = document.getElementById("faq-list");
     const searchInputEl = document.getElementById("faq-search");
