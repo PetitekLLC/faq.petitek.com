@@ -924,10 +924,11 @@ These cause heat variations that may confuse the infrared sensor.`
       }
     ];
 
-    /* === Accordion + Search Logic === */
-    const faqListEl = document.getElementById("faq-list");
+     const faqListEl = document.getElementById("faq-list");
     const searchInputEl = document.getElementById("faq-search");
     const noResultsEl = document.getElementById("no-results");
+    const menuButton = document.querySelector(".navbar-menu");
+    const menuDropdown = document.getElementById("nav-menu");
 
     function createFaqItem(faq) {
       const li = document.createElement("li");
@@ -991,6 +992,26 @@ These cause heat variations that may confuse the infrared sensor.`
       renderFaqs(filtered);
     }
 
+    // Hamburger menu logic
+    menuButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      menuDropdown.classList.toggle("open");
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!menuDropdown.contains(e.target) && !menuButton.contains(e.target)) {
+        menuDropdown.classList.remove("open");
+      }
+    });
+
+    // Close menu when clicking a menu item
+    menuDropdown.querySelectorAll(".menu-item").forEach(link => {
+      link.addEventListener("click", () => {
+        menuDropdown.classList.remove("open");
+      });
+    });
+
     searchInputEl.addEventListener("input", handleSearch);
 
     // Initial render
@@ -998,5 +1019,3 @@ These cause heat variations that may confuse the infrared sensor.`
   </script>
 </body>
 </html>
-
-
