@@ -984,10 +984,16 @@ These cause heat variations that may confuse the infrared sensor.`
         return;
       }
 
-      const filtered = faqs.filter(faq => {
-        const text = (faq.question + " " + faq.answer + " " + faq.category).toLowerCase();
-        return text.includes(term);
-      });
+   const filtered = faqs.filter(faq => {
+  const haystack = (faq.question + " " + faq.answer + " " + faq.category).toLowerCase();
+
+  // Split search box into individual words
+  const terms = term.split(/\s+/).filter(Boolean);
+
+  // Each word must appear somewhere in the FAQ text
+  return terms.every(word => haystack.includes(word));
+});
+
 
       renderFaqs(filtered);
     }
