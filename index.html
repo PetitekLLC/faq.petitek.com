@@ -7,14 +7,27 @@
   <style>
     :root {
       --chatrbox-teal: #2bb2cd;
+      --bg-light: #f5f8fa;
+      --card-radius: 12px;
     }
-    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f8fa; margin: 0; padding: 0; }
 
-    /* NAVBAR LAYOUT */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg-light);
+      color: #222;
+    }
+
+    /* NAVBAR */
     .navbar {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -24,258 +37,354 @@
       box-shadow: 0 1px 8px #0001;
       padding: 0 16px;
     }
-    .back-btn {
-      background: none;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      font-size: 1.13em;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 10px 6px 0;
-      border-radius: 8px;
-      transition: background 0.18s;
-    }
-    .back-btn:hover { background: #25a0b7; }
-    .back-arrow {
-      display: inline-block;
-      width: 19px;
-      height: 19px;
-      stroke: #fff;
-      stroke-width: 2.3;
-    }
     .navbar-title {
-      flex: 1;
-      text-align: center;
-      font-size: 2em;
       font-weight: 700;
-      letter-spacing: 0.01em;
-      color: #fff;
-      font-family: inherit;
-      margin-left: -40px; /* nudge to counter hamburger width for perfect centering */
+      font-size: 1.25rem;
+      letter-spacing: 0.03em;
     }
-    .hamburger {
-      background: none;
-      border: none;
+    .navbar-menu {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      height: 40px;
-      padding: 0;
-      margin-left: 12px;
-      margin-right: 0;
-      border-radius: 7px;
-      transition: background 0.18s;
     }
-    .hamburger:focus, .hamburger:hover { background: #25a0b7; }
-    .hamburger-lines {
-      width: 32px;
-      height: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-end;
-      pointer-events: none;
-    }
-    .hamburger-line {
-      height: 3.2px;
-      border-radius: 2px;
-      width: 100%;
-      background: #fff;
-      transition: background 0.18s;
-    }
-
-    /* Drawer */
-    .drawer-bg {
-      display: none;
-      position: fixed; z-index: 30;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: #0006;
-    }
-    .drawer-bg.open { display: block; animation: fadeIn .18s;}
-    @keyframes fadeIn { from { opacity: 0;} to {opacity: 1;} }
-    .drawer {
-      position: fixed; z-index: 40;
-      top: 0; right: 0;
-      width: 230px; height: 100vh;
-      background: #fff;
-      box-shadow: -2px 0 16px #0002;
-      padding-top: 62px;
-      transform: translateX(240px);
-      transition: transform .23s cubic-bezier(.7,.2,.3,1);
-    }
-    .drawer.open { transform: translateX(0); }
-    .drawer a {
+    .navbar-menu span {
       display: block;
-      color: var(--chatrbox-teal);
-      text-decoration: none;
-      padding: 17px 28px;
-      font-size: 1.14em;
-      border-bottom: 1px solid #e6e6e6;
-      font-weight: 600;
-      transition: background .15s, color .12s;
-    }
-    .drawer a:hover { background: #eafaff; color: #188a9a; }
-    .footer {
-  width: 100%;
-  background: #e7f5fa;
-  color: #188a9a;
-  text-align: center;
-  padding: 18px 8px 16px 8px;
-  font-size: .75em;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  border-top: 1px solid #c4e3ee;
-  margin-top: 44px;
-  box-sizing: border-box;
-}
-
-    /* Main Page Layout */
-    #search {
-      width: 96%; max-width: 700px; margin: 28px auto 30px auto;
-      display: block; padding: 15px 15px;
-      font-size: 1.14em; border-radius: 8px; border: 1px solid #bbb;
-      box-sizing: border-box;
+      width: 22px;
+      height: 2px;
       background: #fff;
-    }
-    .qa-list {
-  max-width: 700px;
-  margin: 0 auto;
-  padding-left: 12px;
-  padding-right: 12px;
-  box-sizing: border-box;
-}
-    .qa {
-      background: #fff; border-radius: 13px;
-      box-shadow: 0 2px 10px #0001, 0 1px 3px #1860c220;
-      margin-bottom: 1.22rem;
-      padding: 1.08rem 1.16rem;
-      transition: box-shadow .18s;
-      border: 1px solid #e9f1fc;
-    }
-    .qa:active, .qa:focus-within { box-shadow: 0 2px 18px #1860c225; }
-    .question {
-      color: var(--chatrbox-teal); font-size: 1.15em; margin-bottom: 3px; font-weight: 600;
-      text-decoration: none; display: block; padding: 0;
+      margin: 3px 0;
+      border-radius: 999px;
     }
 
-    /* Mobile Responsive */
-    @media (max-width: 700px) {
-      .navbar-title { font-size: 1.18em; margin-left: -34px;}
-      .navbar { height: 44px; }
-      .back-btn { font-size: 1em; }
-      .hamburger { width: 32px; height: 32px; margin-left: 2px;}
-      .hamburger-lines { width: 23px; height: 18px; }
-      #search { max-width: 99vw; font-size: 1em; padding: 12px; margin-top: 14px;}
-      .qa-list { max-width: 99vw; }
-      .qa { padding: 0.9rem 0.6rem; }
-      .question { font-size: 1em; }
-      .drawer { width: 70vw; min-width: 142px; max-width: 220px; }
-      .navbar-title { margin-right: 0; }
+    /* PAGE LAYOUT */
+    .page {
+      max-width: 900px;
+      margin: 24px auto 40px auto;
+      padding: 0 16px;
     }
-    @media (max-width: 400px) {
-      .navbar-title { font-size: 0.93em; }
-      #search { font-size: 0.93em; }
-      .question { font-size: 0.93em; }
+
+    .search-wrapper {
+      margin-bottom: 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #d0d7de;
+      font-size: 0.95rem;
+      box-shadow: 0 1px 3px #0001;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: var(--chatrbox-teal);
+      box-shadow: 0 0 0 2px rgba(43,178,205,0.2);
+    }
+
+    /* FAQ CARDS */
+    .faq-list {
+      list-style: none;
+    }
+
+    .faq-item {
+      background: #fff;
+      border-radius: var(--card-radius);
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px #0002;
+      overflow: hidden;
+    }
+
+    .faq-question-btn {
+      width: 100%;
+      border: none;
+      background: none;
+      padding: 14px 18px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .faq-question-btn:hover {
+      background: #f0f4f8;
+    }
+
+    .faq-toggle {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #999;
+      margin-left: 8px;
+      flex-shrink: 0;
+    }
+
+    .faq-category {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--chatrbox-teal);
+      margin-bottom: 4px;
+    }
+
+    .faq-label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding-right: 8px;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease;
+      border-top: 1px solid #eef1f4;
+      background: #fbfdff;
+    }
+
+    .faq-answer-inner {
+      padding: 12px 18px 16px 18px;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: #333;
+    }
+
+    .faq-item.open .faq-answer {
+      /* max-height is set dynamically via JS */
+    }
+
+    /* No results text */
+    .no-results {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 18px;
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        margin-top: 16px;
+      }
+      .faq-question-btn {
+        padding: 12px 14px;
+      }
+      .faq-answer-inner {
+        padding: 10px 14px 14px 14px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- NAV BAR -->
-  <div class="navbar">
+  <header class="navbar">
+    <div class="navbar-title">ChatrBox FAQ</div>
+    <div class="navbar-menu" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
 
-    <span class="navbar-title">ChatrBox&nbsp;FAQ</span>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Open Menu">
-      <span class="hamburger-lines">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </span>
-    </button>
-  </div>
+  <main class="page">
+    <div class="search-wrapper">
+      <input
+        type="text"
+        id="faq-search"
+        class="search-input"
+        placeholder="Search questions..."
+      />
+    </div>
 
-  <!-- Drawer for hamburger menu -->
-  <div class="drawer-bg" id="drawerBg"></div>
-  <nav class="drawer" id="drawerMenu" tabindex="-1">
-   <a href="https://petitek.com">Home</a>
-    <a href="https://petitek.com/support">Support</a>
-    <a href="https://petitek.com/learn">Learn</a>
-  </nav>
+    <ul id="faq-list" class="faq-list"></ul>
 
-  <!-- Main page content -->
-  <input type="text" id="search" placeholder="Search questions..." autocomplete="off" />
-  <div id="qa-list" class="qa-list"></div>
+    <div id="no-results" class="no-results">
+      No questions match your search. Try a different word.
+    </div>
+  </main>
 
   <script>
-    // NAV: Drawer hamburger menu logic
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const drawerMenu = document.getElementById('drawerMenu');
-    const drawerBg = document.getElementById('drawerBg');
+    // STATIC FAQ DATA
+    const faqs = [
+      // Getting Started
+      {
+        category: "Getting Started",
+        question: "What is ChatrBox?",
+        answer:
+          "ChatrBox is a smart, motion-activated pet trainer that plays your recorded voice or alert sounds when your pet enters a protected area. It helps reinforce training even when you’re not in the room."
+      },
+      {
+        category: "Getting Started",
+        question: "What comes in the box?",
+        answer:
+          "Your ChatrBox package includes the ChatrBox device, Focus Shield, Quick Start Guide, and packaging with QR codes that link to setup videos and product registration."
+      },
 
-    function openDrawer() {
-      drawerMenu.classList.add('open');
-      drawerBg.classList.add('open');
-      drawerMenu.focus();
-      document.body.style.overflow = 'hidden';
-    }
-    function closeDrawer() {
-      drawerMenu.classList.remove('open');
-      drawerBg.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    hamburgerBtn.addEventListener('click', openDrawer);
-    drawerBg.addEventListener('click', closeDrawer);
-    drawerMenu.addEventListener('keydown', function(e) {
-      if (e.key === "Escape") closeDrawer();
-    });
+      // Power & Batteries
+      {
+        category: "Power & Batteries",
+        question: "How many batteries does ChatrBox use?",
+        answer:
+          "ChatrBox uses four AAA alkaline batteries. For best performance and battery life, use fresh, name-brand alkaline batteries only."
+      },
+      {
+        category: "Power & Batteries",
+        question: "How long do the batteries last?",
+        answer:
+          "Battery life depends on how often ChatrBox is triggered. With typical use of a few activations per day, you can usually expect several weeks of operation before needing to replace the batteries."
+      },
+      {
+        category: "Power & Batteries",
+        question: "How do I know when the batteries are low?",
+        answer:
+          "As batteries run down, you may notice weaker audio, reduced detection, or inconsistent operation. When this happens, replace all four batteries at the same time."
+      },
 
-    // --- FAQ fetching and rendering ---
-    let faqData = [];
-    const listEl = document.getElementById('qa-list');
-    const searchInput = document.getElementById('search');
+      // Range & Detection
+      {
+        category: "Range & Detection",
+        question: "How far can ChatrBox detect motion?",
+        answer:
+          "In an open space, ChatrBox can detect motion up to about 20 feet in a wide cone. Actual range can vary based on placement, height, and surrounding objects."
+      },
+      {
+        category: "Range & Detection",
+        question: "What are Focus Shields and why would I use them?",
+        answer:
+          "Focus Shields narrow the motion detection field so you can protect a specific zone—like part of a sofa, a doorway, a trash can, or a houseplant—without triggering on movement in the background."
+      },
 
-    fetch('https://opensheet.elk.sh/1lcfJ-OKpeF4A6u9A2rs6CvMcncv7cp8O9IG61J96Tec/Support')
-      .then(res => res.json())
-      .then(data => {
-        faqData = data;
-        render(faqData);
-      });
+      // Recording & Sounds
+      {
+        category: "Recording & Sounds",
+        question: "Can I record my own voice?",
+        answer:
+          "Yes. ChatrBox is designed around your voice. You can record a custom message that plays whenever your pet triggers the sensor. This helps your pet recognize and respond to your familiar voice."
+      },
+      {
+        category: "Recording & Sounds",
+        question: "Can I change the recording later?",
+        answer:
+          "Absolutely. You can re-record and replace your message at any time. Just follow the recording steps in the Quick Start Guide or the online video tutorials."
+      },
 
-    searchInput.addEventListener('input', function() {
-      const q = this.value.trim().toLowerCase();
-      if (!q) return render(faqData);
-      render(faqData.filter(item =>
-        (item.Question || '').toLowerCase().includes(q)
-      ));
-    });
+      // Placement & Training
+      {
+        category: "Placement & Training",
+        question: "Where should I place ChatrBox for best results?",
+        answer:
+          "Place ChatrBox so the sensor faces the area you want to protect at roughly your pet’s head height. Aim it so the detection cone covers only the problem area to reduce false triggers."
+      },
+      {
+        category: "Placement & Training",
+        question: "Can I move ChatrBox between different areas?",
+        answer:
+          "Yes. Many pet owners start with the most important trouble spot—like a couch or trash can—and then move ChatrBox to new locations as their pet learns which areas are off-limits."
+      },
 
-    function render(data) {
-      listEl.innerHTML = '';
-      if (!data.length) {
-        listEl.innerHTML = `<p style="text-align:center;color:#888;">No results found.</p>`;
-        return;
+      // Purchasing & Support
+      {
+        category: "Purchasing & Support",
+        question: "Where can I buy ChatrBox?",
+        answer:
+          "ChatrBox is sold online through select retailers such as Amazon. Check the product packaging or our website for current purchasing links."
+      },
+      {
+        category: "Purchasing & Support",
+        question: "How can I get support if I need help?",
+        answer:
+          "Scan the QR codes on the packaging or visit our support page for setup videos, FAQs, troubleshooting tips, and ways to contact customer support."
+      },
+
+      // Troubleshooting
+      {
+        category: "Troubleshooting",
+        question: "ChatrBox isn’t triggering when my pet walks by. What should I check?",
+        answer:
+          "First, confirm that the power is on and the batteries are fresh. Make sure the sensor faces the area where your pet enters, and that the Focus Shield (if installed) isn’t blocking the detection zone."
+      },
+      {
+        category: "Troubleshooting",
+        question: "ChatrBox is triggering too often or at the wrong time. How do I fix that?",
+        answer:
+          "Try aiming the sensor slightly lower or higher, or use a more narrow Focus Shield. Also make sure it isn’t pointed at busy walkways, windows with outside movement, or TVs and other motion sources."
       }
-      data.forEach(item => {
-        if (item.Question && item.View) {
-          listEl.innerHTML += `
-            <div class="qa">
-              <a href="${item.View}" target="_blank" class="question">${item.Question}</a>
-            </div>
-          `;
+    ];
+
+    const faqListEl = document.getElementById("faq-list");
+    const searchInputEl = document.getElementById("faq-search");
+    const noResultsEl = document.getElementById("no-results");
+
+    function createFaqItem(faq) {
+      const li = document.createElement("li");
+      li.className = "faq-item";
+
+      li.innerHTML = `
+        <button class="faq-question-btn" type="button">
+          <span class="faq-label">
+            <span class="faq-category">${faq.category}</span>
+            <span class="faq-question-text">${faq.question}</span>
+          </span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            ${faq.answer}
+          </div>
+        </div>
+      `;
+
+      const btn = li.querySelector(".faq-question-btn");
+      const answer = li.querySelector(".faq-answer");
+      const toggle = li.querySelector(".faq-toggle");
+
+      btn.addEventListener("click", () => {
+        const isOpen = li.classList.contains("open");
+        if (isOpen) {
+          li.classList.remove("open");
+          answer.style.maxHeight = null;
+          toggle.textContent = "+";
+        } else {
+          li.classList.add("open");
+          answer.style.maxHeight = answer.scrollHeight + "px";
+          toggle.textContent = "−";
         }
       });
-    }
-  </script>
-  <footer class="footer">
-  &copy; 2025 Petitek LLC. All rights reserved.
-</footer>
 
+      return li;
+    }
+
+    function renderFaqs(filteredFaqs) {
+      faqListEl.innerHTML = "";
+      filteredFaqs.forEach(faq => {
+        faqListEl.appendChild(createFaqItem(faq));
+      });
+      noResultsEl.style.display = filteredFaqs.length ? "none" : "block";
+    }
+
+    function handleSearch() {
+      const term = searchInputEl.value.trim().toLowerCase();
+      if (!term) {
+        renderFaqs(faqs);
+        return;
+      }
+
+      const filtered = faqs.filter(faq => {
+        const text = (faq.question + " " + faq.answer + " " + faq.category).toLowerCase();
+        return text.includes(term);
+      });
+
+      renderFaqs(filtered);
+    }
+
+    searchInputEl.addEventListener("input", handleSearch);
+
+    // Initial render
+    renderFaqs(faqs);
+  </script>
 </body>
 </html>
-
 
