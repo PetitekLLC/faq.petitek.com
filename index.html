@@ -924,7 +924,13 @@ These cause heat variations that may confuse the infrared sensor.`
       }
     ];
 
-     const faqListEl = document.getElementById("faq-list");
+    // 🔹 Add this block RIGHT HERE:
+  const STOP_WORDS = new Set([
+    "the","is","are","a","an","and","or","of","to","in","on","at","for",
+    "what","how","why","does","do","my","your","with","when","where","can","i"
+  ]);
+    
+    const faqListEl = document.getElementById("faq-list");
     const searchInputEl = document.getElementById("faq-search");
     const noResultsEl = document.getElementById("no-results");
     const menuButton = document.querySelector(".navbar-menu");
@@ -977,26 +983,32 @@ These cause heat variations that may confuse the infrared sensor.`
       noResultsEl.style.display = filteredFaqs.length ? "none" : "block";
     }
 
-    function handleSearch() {
-      const term = searchInputEl.value.trim().toLowerCase();
-      if (!term) {
-        renderFaqs(faqs);
-        return;
-      }
+function handleSearch() {
+  let term = searchInputEl.value.trim().toLowerCase();
+  if (!term) {
+    renderFaqs(faqs);
+    return;
+  }
 
-   const filtered = faqs.filter(faq => {
-  const haystack = (faq.question + " " + faq.answer + " " + faq.category).toLowerCase();
+  // Split into words
+  let terms = term.split(/\s+/).filter(Boolean);
 
-  // Split search box into individual words
-  const terms = term.split(/\s+/).filter(Boolean);
+  // Remove stop words
+  terms = terms.filter(word => !STOP_WORDS.has(word));
 
-  // Each word must appear somewhere in the FAQ text
-  return terms.every(word => haystack.includes(word));
-});
+  // If everything was removed (e.g., user typed “what is the”)
+  if (terms.length === 0) {
+    renderFaqs(faqs);
+    return;
+  }
 
+  const filtered = faqs.filter(faq => {
+    const haystack = (faq.question + " " + faq.answer + " " + faq.category).toLowerCase();
+    return terms.every(word => haystack.includes(word));
+  });
 
-      renderFaqs(filtered);
-    }
+  renderFaqs(filtered);
+}
 
     // Hamburger menu logic
     menuButton.addEventListener("click", (e) => {
