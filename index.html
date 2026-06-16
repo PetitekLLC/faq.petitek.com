@@ -1,240 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
-  <title>ChatrBox FAQ</title>
+  <title>ChatrBox FAQ | Petitek</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+
   <style>
-    :root {
-      --chatrbox-teal: #5EBCBC;
-      --bg-light: #f5f8fa;
-      --card-radius: 12px;
+  :root {
+    --teal: #5EBCBC;
+    --black: #111111;
+    --white: #ffffff;
+    --muted: #5f666d;
+    --soft-bg: #f6f8f8;
+    --border: #e2e7e7;
+    --radius-md: 20px;
+    --radius-lg: 28px;
+    --shadow: 0 8px 24px rgba(0,0,0,.06);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: var(--soft-bg);
+    color: var(--black);
+  }
+
+  .site-header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .nav-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--teal);
+    letter-spacing: -.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 600;
+    font-size: .95rem;
+  }
+
+  .nav-links a:hover {
+    color: var(--teal);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--black);
+    color: var(--white) !important;
+  }
+
+  .btn-primary:hover {
+    background: #333;
+    color: var(--white) !important;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    border: 0;
+    background: transparent;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--black);
+  }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 42px 18px 60px;
+  }
+
+  .faq-hero {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .faq-badge {
+    display: inline-block;
+    background: rgba(94,188,188,.12);
+    color: #247979;
+    border: 1px solid rgba(94,188,188,.35);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: .85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 16px;
+  }
+
+  .faq-hero h1 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    margin-bottom: 10px;
+  }
+
+  .faq-hero p {
+    color: var(--muted);
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-size: 1.08rem;
+  }
+
+  .search-wrapper {
+    max-width: 860px;
+    margin: 0 auto 28px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 18px 20px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    font-size: 1.05rem;
+    box-shadow: var(--shadow);
+    outline: none;
+  }
+
+  .search-input:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 4px rgba(94,188,188,.18);
+  }
+
+  .faq-list {
+    list-style: none;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    margin-bottom: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.045);
+    overflow: hidden;
+  }
+
+  .faq-question-btn {
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 20px 22px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    color: var(--black);
+  }
+
+  .faq-question-btn:hover {
+    background: #f8fbfb;
+  }
+
+  .faq-label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-right: 12px;
+  }
+
+  .faq-category {
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #247979;
+    font-weight: 800;
+  }
+
+  .faq-question-text {
+    font-size: 1.03rem;
+    font-weight: 750;
+    line-height: 1.35;
+  }
+
+  .faq-toggle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--teal);
+    margin-left: 10px;
+    flex-shrink: 0;
+  }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .22s ease;
+    border-top: 1px solid var(--border);
+    background: #fbfefe;
+  }
+
+  .faq-answer-inner {
+    padding: 18px 22px 22px;
+    font-size: .98rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .no-results {
+    text-align: center;
+    color: var(--muted);
+    margin-top: 24px;
+    display: none;
+  }
+
+  .faq-footer-actions {
+    max-width: 1000px;
+    margin: 30px auto 0;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+
+  .faq-footer-actions h2 {
+    margin-bottom: 8px;
+  }
+
+  .faq-footer-actions p {
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  .faq-action-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--black);
+    background: var(--white);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+
+  @media (max-width: 760px) {
+    .nav-wrap {
+      padding: 16px 18px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: var(--bg-light);
-      color: #222;
-    }
-
-    /* NAVBAR */
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      height: 56px;
-      background: var(--chatrbox-teal);
-      color: #fff;
-      box-shadow: 0 1px 8px #0001;
-      padding: 0 16px;
-    }
-    .navbar-title {
-      font-weight: 700;
-      font-size: 1.25rem;
-      letter-spacing: 0.03em;
-    }
-    .navbar-menu {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      cursor: pointer;
-      padding: 6px;
-      border-radius: 999px;
-    }
-    .navbar-menu:hover {
-      background: rgba(255,255,255,0.12);
-    }
-    .navbar-menu span {
+    .mobile-menu-toggle {
       display: block;
-      width: 22px;
-      height: 2px;
-      background: #fff;
-      margin: 3px 0;
-      border-radius: 999px;
     }
 
-    /* DROPDOWN MENU */
-    .menu-dropdown {
-      position: fixed;
-      top: 56px;
-      right: 12px;
-      background: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
-      padding: 8px 0;
-      min-width: 160px;
+    .nav-links {
       display: none;
-      z-index: 30;
+      position: absolute;
+      top: 68px;
+      left: 14px;
+      right: 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.12);
+      padding: 16px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
     }
 
-    .menu-dropdown.open {
-      display: block;
+    .nav-links.is-open {
+      display: flex;
     }
 
-    .menu-item {
-      display: block;
-      padding: 10px 16px;
-      font-size: 0.9rem;
-      color: #222;
-      text-decoration: none;
-      white-space: nowrap;
+    .nav-links a {
+      padding: 10px 8px;
     }
 
-    .menu-item:hover {
-      background: #f0f4f8;
-      color: #000;
-    }
-
-    /* PAGE LAYOUT */
     .page {
-      max-width: 1200px;
-      margin: 24px auto 40px auto;
-      padding: 0 16px;
-    }
-
-    .search-wrapper {
-      margin-bottom: 20px;
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 8px;
-      border: 1px solid #d0d7de;
-      font-size: 0.95rem;
-      box-shadow: 0 1px 3px #0001;
-      outline: none;
-    }
-   
-.search-input:focus {
-  border-color: var(--chatrbox-teal);
-  box-shadow: 0 0 0 2px rgba(94, 188, 188, 0.25);
-}
-
-    /* FAQ CARDS */
-    .faq-list {
-      list-style: none;
-    }
-
-    .faq-item {
-      background: #fff;
-      border-radius: var(--card-radius);
-      margin-bottom: 10px;
-      box-shadow: 0 2px 8px #0002;
-      overflow: hidden;
+      padding: 30px 14px 50px;
     }
 
     .faq-question-btn {
-      width: 100%;
-      border: none;
-      background: none;
-      padding: 14px 18px;
-      text-align: left;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      font-size: 0.98rem;
-      font-weight: 600;
-      color: #222;
-    }
-
-    .faq-question-btn:hover {
-      background: #f0f4f8;
-    }
-
-    .faq-toggle {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #999;
-      margin-left: 8px;
-      flex-shrink: 0;
-    }
-
-    .faq-category {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--chatrbox-teal);
-      margin-bottom: 4px;
-    }
-
-    .faq-label {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      padding-right: 8px;
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease;
-      border-top: 1px solid #eef1f4;
-      background: #fbfdff;
+      padding: 17px 18px;
     }
 
     .faq-answer-inner {
-      padding: 12px 18px 16px 18px;
-      font-size: 0.9rem;
-      line-height: 1.45;
-      color: #333;
+      padding: 15px 18px 19px;
     }
 
-    .faq-item.open .faq-answer {
-      /* max-height set dynamically in JS */
+    .faq-action-row {
+      flex-direction: column;
     }
 
-    /* No results text */
-    .no-results {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #666;
-      margin-top: 18px;
-      display: none;
+    .faq-action-row .btn {
+      width: 100%;
     }
+  }
 
-    @media (max-width: 600px) {
-      .page {
-        margin-top: 16px;
-      }
-      .faq-question-btn {
-        padding: 12px 14px;
-      }
-      .faq-answer-inner {
-        padding: 10px 14px 14px 14px;
-      }
-    }
-  </style>
+  .faq-quick-help {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--muted);
+}
+
+.faq-quick-help a {
+  color: var(--teal);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.faq-quick-help a:hover {
+  text-decoration: underline;
+}
+
+</style>
+
 </head>
 <body>
-  <header class="navbar">
-    <div class="navbar-title">ChatrBox FAQ</div>
-    <div class="navbar-menu" aria-hidden="false" aria-label="Open navigation menu">
-      <span></span>
-      <span></span>
-      <span></span>
+  <header class="site-header">
+    <div class="nav-wrap">
+
+      <a href="https://petitek.com" class="brand">
+        PETITEK
+      </a>
+
+      <button class="mobile-menu-toggle"
+              type="button"
+              aria-label="Open menu"
+              aria-expanded="false"
+              aria-controls="site-navigation">
+        ☰
+      </button>
+
+      <nav id="site-navigation" class="nav-links">
+
+        <a href="https://petitek.com/learn">Learn</a>
+        <a href="https://petitek.com/support">Support</a>
+        <a href="https://petitek.com/warranty">Warranty</a>
+        <a href="https://petitek.com/about">About</a>
+
+        <a href="https://petitek.com/embedded-checkout"
+          class="btn btn-primary">
+          Buy ChatrBox
+        </a>
+
+      </nav>
+
     </div>
   </header>
 
-  <!-- Dropdown menu -->
-  <nav class="menu-dropdown" id="nav-menu">
-    <a class="menu-item" href="https://petitek.com">Home</a>
-    <a class="menu-item" href="https://petitek.com/support/">Support</a>
-    <a class="menu-item" href="https://petitek.com/learn/">Learn (Videos)</a>
-  </nav>
-
   <main class="page">
+
+    <div class="faq-hero">
+
+      <div class="faq-badge">
+        ChatrBox Help Center
+      </div>
+
+      <h1>ChatrBox FAQ</h1>
+
+      <p>
+        Search common setup, training, placement, battery, Wi-Fi, and troubleshooting questions.
+      </p>
+
+    </div>
+
+    <div class="faq-quick-help">
+      Need help?
+      <a href="https://petitek.com/support">Visit the Support Center</a>
+    </div>
+
+      <div class="faq-badge">
+        ChatrBox Help Center
+      </div>
+
+      <h1>ChatrBox FAQ</h1>
+
+      <p>
+        Search common setup, training, placement, battery, Wi-Fi, and troubleshooting questions.
+      </p>
+
+    </div>
+
     <div class="search-wrapper">
       <input
         type="text"
@@ -249,6 +437,35 @@
     <div id="no-results" class="no-results">
       No questions match your search. Try a different word.
     </div>
+
+    <div class="faq-footer-actions">
+
+  <h2>Still need help?</h2>
+
+  <p>
+    Visit the Support Center, watch ChatrBox learning videos, or return to the Petitek website.
+  </p>
+
+  <div class="faq-action-row">
+
+    <a href="https://petitek.com/support"
+       class="btn btn-primary">
+      Support Center
+    </a>
+
+    <a href="https://petitek.com/learn"
+       class="btn btn-outline">
+      Learn Videos
+    </a>
+
+    <a href="https://petitek.com"
+       class="btn btn-outline">
+      Return Home
+    </a>
+
+  </div>
+
+</div>
   </main>
 
   <script>
@@ -934,8 +1151,8 @@ These cause heat variations that may confuse the infrared sensor.`
     const faqListEl = document.getElementById("faq-list");
     const searchInputEl = document.getElementById("faq-search");
     const noResultsEl = document.getElementById("no-results");
-    const menuButton = document.querySelector(".navbar-menu");
-    const menuDropdown = document.getElementById("nav-menu");
+    const menuToggle = document.querySelector(".mobile-menu-toggle");
+    const siteNavigation = document.querySelector("#site-navigation");
 
     function createFaqItem(faq) {
       const li = document.createElement("li");
@@ -988,6 +1205,17 @@ function handleSearch() {
   let term = searchInputEl.value.trim().toLowerCase();
   if (!term) {
     renderFaqs(faqs);
+      const firstFaq = document.querySelector(".faq-item");
+
+  if (firstFaq) {
+    firstFaq.classList.add("open");
+
+    const answer = firstFaq.querySelector(".faq-answer");
+    const toggle = firstFaq.querySelector(".faq-toggle");
+
+    answer.style.maxHeight = answer.scrollHeight + "px";
+    toggle.textContent = "−";
+  }
     return;
   }
 
@@ -1011,25 +1239,22 @@ function handleSearch() {
   renderFaqs(filtered);
 }
 
-    // Hamburger menu logic
-    menuButton.addEventListener("click", (e) => {
-      e.stopPropagation();
-      menuDropdown.classList.toggle("open");
-    });
+if (menuToggle && siteNavigation) {
+  menuToggle.addEventListener("click", function () {
+    const isOpen = siteNavigation.classList.toggle("is-open");
 
-    // Close menu when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!menuDropdown.contains(e.target) && !menuButton.contains(e.target)) {
-        menuDropdown.classList.remove("open");
-      }
-    });
+    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+  });
 
-    // Close menu when clicking a menu item
-    menuDropdown.querySelectorAll(".menu-item").forEach(link => {
-      link.addEventListener("click", () => {
-        menuDropdown.classList.remove("open");
-      });
+  siteNavigation.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", function () {
+      siteNavigation.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Open menu");
     });
+  });
+}
 
     searchInputEl.addEventListener("input", handleSearch);
 
