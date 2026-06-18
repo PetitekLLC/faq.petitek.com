@@ -338,6 +338,28 @@
     }
   }
 
+  /* Keep FAQ support link visible without hamburger */
+@media (max-width: 760px) {
+  .mobile-menu-toggle {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex !important;
+    position: static !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+
+  .nav-links a {
+    padding: 0 !important;
+  }
+}
+
   .faq-quick-help {
   text-align: center;
   margin-bottom: 24px;
@@ -364,37 +386,23 @@
 
 </head>
 <body>
-  <header class="site-header">
-    <div class="nav-wrap">
 
-      <a href="https://portal.petitek.com/petitek" class="brand">
-        PETITEK
+<header class="site-header">
+  <div class="nav-wrap">
+
+    <a href="https://petitek.com/v2" class="brand">
+      PETITEK
+    </a>
+
+    <nav class="nav-links">
+      <a href="https://petitek.com/support">
+        ← Back to Support
       </a>
+    </nav>
 
-      <button class="mobile-menu-toggle"
-              type="button"
-              aria-label="Open menu"
-              aria-expanded="false"
-              aria-controls="site-navigation">
-        ☰
-      </button>
+  </div>
+</header>
 
-      <nav id="site-navigation" class="nav-links">
-
-        <a href="https://petitek.com/learn">Learn</a>
-        <a href="https://petitek.com/support">Support</a>
-        <a href="https://petitek.com/warranty">Warranty</a>
-        <a href="https://petitek.com/about">About</a>
-
-        <a href="https://petitek.com/embedded-checkout"
-          class="btn btn-primary">
-          Buy ChatrBox
-        </a>
-
-      </nav>
-
-    </div>
-  </header>
 
   <main class="page">
 
@@ -435,24 +443,6 @@
     Visit the Support Center, watch ChatrBox learning videos, or return to the Petitek website.
   </p>
 
-  <div class="faq-action-row">
-
-    <a href="https://petitek.com/support"
-       class="btn btn-primary">
-      Support Center
-    </a>
-
-    <a href="https://petitek.com/learn"
-       class="btn btn-outline">
-      Learn Videos
-    </a>
-
-    <a href="https://petitek.com"
-       class="btn btn-outline">
-      Return Home
-    </a>
-
-  </div>
 
 </div>
   </main>
